@@ -1,14 +1,14 @@
 ---
-title: Sample .md file
-date: '2016-03-08'
-tags: ['markdown', 'code', 'features']
+title: Установка Archlinux
+date: '2022-02-16'
+tags: ['arch', 'btrfs', 'linux']
 draft: false
-summary: Example of a markdown file with code blocks and syntax highlighting
+summary: Установка arch ssd btrfs subvolume
 ---
 
-A sample post with markdown.
+## Загрузка образа
 
-## Inline Highlighting
+[Archlinux](https://archlinux.org/download/)
 
 Sample of inline highlighting `sum = parseInt(num1) + parseInt(num2)`
 
@@ -22,17 +22,4 @@ num1 = prompt('Enter first number')
 num2 = prompt('Enter second number')
 sum = parseInt(num1) + parseInt(num2) // "+" means "add"
 alert('Sum = ' + sum) // "+" means combine into a string
-```
-
-Some Python code 🐍
-
-```python
-def fib():
-    a, b = 0, 1
-    while True:            # First iteration:
-        yield a            # yield 0 to start with and then
-        a, b = b, a + b    # a will now be 1, and b will also be 1, (0 + 1)
-
-for index, fibonacci_number in zip(range(10), fib()):
-     print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
 ```

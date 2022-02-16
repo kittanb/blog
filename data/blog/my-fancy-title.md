@@ -1,10 +1,10 @@
 ---
-title: My fancy title
-date: '2021-01-31'
-tags: ['hello']
+title: Тестовая статья
+date: '2022-02-15'
+tags: ['test']
 draft: true
 summary:
 images: []
 ---
 
-Draft post which should not display
+Тестовая статья
