@@ -2,7 +2,7 @@
 title: Тестовая статья
 date: '2022-02-15'
 tags: ['test']
-draft: true
+draft: false
 summary:
 images: []
 ---
