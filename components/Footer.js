@@ -24,6 +24,7 @@ export default function Footer() {
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
           <Link href="https://github.com/kittanb/blog">
             Блог для всякого
+            
           </Link>
         </div>
       </div>
