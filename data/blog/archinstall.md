@@ -59,7 +59,7 @@ umount /mnt
 ### Смонтируем subvolumes btrfs и efi раздел
 
 ```
-mount -o subvol=/@,defaults,noatime,autodefrag,compress=zstd,discard=async,ssd,commit=120  /dev/sdX2 /mnt
+mount -o subvol=/@,noatime,autodefrag,compress=zstd,discard=async,ssd,commit=120  /dev/sdX2 /mnt
 ```
 ```
 mkdir /mnt/{boot,home}
@@ -68,7 +68,7 @@ mkdir /mnt/{boot,home}
 mkdir /mnt/boot/efi
 ```
 ```
-mount -o subvol=/@home,defaults,noatime,autodefrag,compress=zstd,discard=async,ssd,commit=120 /dev/sdX2 /mnt/home
+mount -o subvol=/@home,noatime,autodefrag,compress=zstd,discard=async,ssd,commit=120 /dev/sdX2 /mnt/home
 ```
 ```
 mount /dev/sdX1 /mnt/boot/efi
