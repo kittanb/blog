@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: 'lil.drill',
   description: 'Блог для всякого',
   language: 'ru-ru',
-  theme: 'system', // system, dark or light
+  theme: 'dark', // system, dark or light
   siteUrl: 'https://kittan.ru',
   siteRepo: 'https://github.com/kittanb/blog',
   siteLogo: '/static/images/logo.png',
@@ -16,7 +16,7 @@ const siteMetadata = {
   //facebook: 'https://facebook.com',
   //youtube: 'https://youtube.com',
   //linkedin: 'https://www.linkedin.com',
-  locale: 'ru-Ru',
+  locale: 'ru-RU',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
@@ -42,17 +42,17 @@ const siteMetadata = {
       // https://giscus.app/
       repo: 'kittanb/blog',
       repositoryId: 'R_kgDOG2JHVA',
-      category: 'GeneralAnnouncements',
+      category: 'General',
       categoryId: 'DIC_kwDOG2JHVM4CBMiq',
-      mapping: 'pathname', // supported options: pathname, url, title
+      mapping: 'title', // supported options: pathname, url, title
       reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
       // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
-      metadata: '0',
+      metadata: '1',
       // theme example: light, dark, dark_dimmed, dark_high_contrast
       // transparent_dark, preferred_color_scheme, custom
       theme: 'dark',
       // theme when dark mode
-      darkTheme: 'transparent_dark',
+      darkTheme: 'dark',
       // If the theme option above is set to 'custom`
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
