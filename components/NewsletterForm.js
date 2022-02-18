@@ -47,7 +47,7 @@ const NewsletterForm = ({ title = 'Подпишитесь на новости' }
             className="w-72 rounded-md px-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-black"
             id="email-input"
             name="email"
-            placeholder={subscribed ? "Вы подписались!  🎉" : 'Введите вашу почту'}
+            placeholder={subscribed ? 'Вы подписались!  🎉' : 'Введите вашу почту'}
             ref={inputEl}
             required
             type="email"
