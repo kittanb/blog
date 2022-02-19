@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="349.747 -23.084 500 500" width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <pattern x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse" viewBox="0 0 100 100" id="pattern-0" bx:pinned="true">
+      <rect x="0" y="0" width="50" height="100" style="fill: black;"/>
+    </pattern>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="599.747" cy="226.916" r="184.888" id="gradient-0" gradientTransform="matrix(1, 0, 0, 1, 0, -453.831482)">
+      <stop offset="0" style="stop-color: rgba(106, 18, 179, 1)"/>
+      <stop offset="1" style="stop-color: rgba(51, 9, 86, 1)"/>
+    </radialGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-1" spreadMethod="pad" gradientTransform="matrix(1.573531, 0, 0, 1.573531, -375.09421, -231.135837)">
+      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
+      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
+    </radialGradient>
+  </defs>
+  <path d="M 582.045 -436.281 Q 599.747 -479.848 617.449 -436.281 L 778.734 -39.333 Q 796.436 4.234 761.032 4.234 L 438.462 4.234 Q 403.058 4.234 420.76 -39.333 Z" style="stroke: rgb(0, 0, 0); paint-order: fill; fill: url(#gradient-0);" transform="matrix(1, 0, 0, -1, 0, 0)" bx:shape="triangle 403.058 -479.848 393.378 484.082 0.5 0.09 1@2cfbd680"/>
+  <path d="M 654 403 m -177.742 0 a 177.742 177.742 0 1 0 355.484 0 a 177.742 177.742 0 1 0 -355.484 0 Z M 654 403 m -88.871 0 a 88.871 88.871 0 0 1 177.742 0 a 88.871 88.871 0 0 1 -177.742 0 Z" style="fill: url(#gradient-1); fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge;" transform="matrix(-0.427288, 0.904116, -0.904116, -0.427288, 1243.551751, -192.178621)" bx:shape="ring 654 403 88.871 88.871 177.742 177.742 1@3b90df51"/>
+</svg>
