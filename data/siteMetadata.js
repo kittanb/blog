@@ -2,7 +2,7 @@ const siteMetadata = {
   title: 'Блог kittan.ru',
   author: 'Kittan Bachika',
   headerTitle: 'kittan.ru',
-  description: 'Мои статьи про open-source. Рад, если был вам полезен.',
+  description: 'Мои статьи про open-source штуки. Здорово, если что-то тут будет полезно вам.',
   language: 'ru-ru',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://kittan.ru',
