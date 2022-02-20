@@ -1,8 +1,8 @@
 const siteMetadata = {
-  title: 'lil.drill',
+  title: 'Блог kittan.ru',
   author: 'Kittan Bachika',
-  headerTitle: 'lil.drill',
-  description: 'Блог для всякого',
+  headerTitle: 'kittan.ru',
+  description: 'Мои статьи про open-source. Рад, если был вам полезен.',
   language: 'ru-ru',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://kittan.ru',

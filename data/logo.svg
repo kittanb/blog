@@ -1,43 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="349.747 -23.084 500 500" width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
-  <defs>
-    <pattern x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse" viewBox="0 0 100 100" id="pattern-0" bx:pinned="true">
-      <rect x="0" y="0" width="50" height="100" style="fill: black;"/>
-    </pattern>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-2" spreadMethod="pad" gradientTransform="matrix(1.055924, -0.000001, 0.000001, 1.055924, -36.580214, -22.54069)">
-      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
-      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
-    </radialGradient>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-1" spreadMethod="pad" gradientTransform="matrix(1.055924, -0.000001, 0.000001, 1.055924, -36.579886, -22.540469)">
-      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
-      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
-    </radialGradient>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-3" spreadMethod="pad" gradientTransform="matrix(1.055924, -0.000001, 0.000001, 1.055924, -36.580386, -22.540797)">
-      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
-      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
-    </radialGradient>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-5" spreadMethod="pad" gradientTransform="matrix(1.055924, -0.000001, 0.000001, 1.055924, -36.57973, -22.54036)">
-      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
-      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
-    </radialGradient>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-6" spreadMethod="pad" gradientTransform="matrix(1.055924, -0.000001, 0.000001, 1.055924, -36.57957, -22.540249)">
-      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
-      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
-    </radialGradient>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="654" cy="403" r="112.957" id="gradient-4" spreadMethod="pad" gradientTransform="matrix(1.055924, -0.000001, 0.000001, 1.055924, -36.579409, -22.540139)">
-      <stop offset="0" style="stop-color: rgba(25, 255, 113, 1)"/>
-      <stop offset="1" style="stop-color: rgba(0, 178, 68, 1)"/>
-    </radialGradient>
-    <radialGradient gradientUnits="userSpaceOnUse" cx="649.36" cy="204.802" r="192.453" id="gradient-0">
-      <stop offset="0" style="stop-color: rgba(153, 39, 219, 1)"/>
-      <stop offset="1" style="stop-color: rgba(93, 22, 134, 1)"/>
-    </radialGradient>
-  </defs>
-  <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: url(#gradient-0);" cx="649.36" cy="204.802" rx="192.453" ry="192.453"/>
-  <path d="M 654 403 m -119.275 0 a 119.275 119.275 0 1 0 238.55 0 a 119.275 119.275 0 1 0 -238.55 0 Z M 654 403 m -59.637 0 a 59.637 59.637 0 0 1 119.274 0 a 59.637 59.637 0 0 1 -119.274 0 Z" style="fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge; fill: url(#gradient-2);" transform="matrix(0.956327, 0.292298, -0.292298, 0.956327, 85.934452, -332.376913)" bxShape="ring 654 403 59.637 59.637 119.275 119.275 1@70282a1c"/>
-  <path d="M 654 403 m -119.275 0 a 119.275 119.275 0 1 0 238.55 0 a 119.275 119.275 0 1 0 -238.55 0 Z M 654 403 m -59.637 0 a 59.637 59.637 0 0 1 119.274 0 a 59.637 59.637 0 0 1 -119.274 0 Z" style="fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge; fill: url(#gradient-1);" transform="matrix(0.956327, 0.292298, -0.292298, 0.956327, 207.102398, -402.603018)" bxShape="ring 654 403 59.637 59.637 119.275 119.275 1@70282a1c"/>
-  <path d="M 654 403 m -119.275 0 a 119.275 119.275 0 1 0 238.55 0 a 119.275 119.275 0 1 0 -238.55 0 Z M 654 403 m -59.637 0 a 59.637 59.637 0 0 1 119.274 0 a 59.637 59.637 0 0 1 -119.274 0 Z" style="fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge; fill: url(#gradient-3);" transform="matrix(0.956327, 0.292298, -0.292298, 0.956327, 155.288433, -443.313864)" bxShape="ring 654 403 59.637 59.637 119.275 119.275 1@70282a1c"/>
-  <path d="M 654 403 m -119.275 0 a 119.275 119.275 0 1 0 238.55 0 a 119.275 119.275 0 1 0 -238.55 0 Z M 654 403 m -59.637 0 a 59.637 59.637 0 0 1 119.274 0 a 59.637 59.637 0 0 1 -119.274 0 Z" style="fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge; fill: url(#gradient-5);" transform="matrix(0.956327, 0.292298, -0.292298, 0.956327, 86.202083, -411.238974)" bxShape="ring 654 403 59.637 59.637 119.275 119.275 1@70282a1c"/>
-  <path d="M 654 403 m -119.275 0 a 119.275 119.275 0 1 0 238.55 0 a 119.275 119.275 0 1 0 -238.55 0 Z M 654 403 m -59.637 0 a 59.637 59.637 0 0 1 119.274 0 a 59.637 59.637 0 0 1 -119.274 0 Z" style="fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge; fill: url(#gradient-6);" transform="matrix(0.956327, 0.292298, -0.292298, 0.956327, 163.923519, -301.441885)" bxShape="ring 654 403 59.637 59.637 119.275 119.275 1@70282a1c"/>
-  <path d="M 654 403 m -119.275 0 a 119.275 119.275 0 1 0 238.55 0 a 119.275 119.275 0 1 0 -238.55 0 Z M 654 403 m -59.637 0 a 59.637 59.637 0 0 1 119.274 0 a 59.637 59.637 0 0 1 -119.274 0 Z" style="fill-opacity: 0.6; paint-order: fill; stroke: rgb(0, 0, 0); mix-blend-mode: color-dodge; fill: url(#gradient-4);" transform="matrix(0.956327, 0.292298, -0.292298, 0.956327, 223.140941, -355.722464)" bxShape="ring 654 403 59.637 59.637 119.275 119.275 1@70282a1c"/>
+<!-- Generator: Adobe Illustrator 23.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.2" baseProfile="tiny" id="Слой_1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px"
+	 viewBox="0 0 50 50" xmlSpace="preserve">
+<text transform="matrix(1 0 0 1 20.5042 41.0879)" fill="#00A9E7" font-family="'LucidaSansUnicode'" font-size="52px">k</text>
+<text transform="matrix(1 0 0 1 -0.4438 39.5679)" fill="#00A9E7" font-family="'LucidaSansUnicode'" font-size="36px">&gt;</text>
 </svg>
