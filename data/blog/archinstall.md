@@ -4,9 +4,14 @@ date: '2022-02-16'
 tags: ['arch', 'btrfs', 'linux']
 draft: false
 summary: Описана установка на ssd с btrfs и efi.
+layout: PostSimple
 ---
 
 `Статья находится в разработке`
+
+<TOCInline toc={props.toc} exclude="Overview"/>
+
+## Предисловие
 
 
 В [Арчвики](https://wiki.archlinux.org/title/Arch_Linux#User_centrality) написано про Арч это:
@@ -16,14 +21,14 @@ summary: Описана установка на ssd с btrfs и efi.
 ## Подготовка
 
 
-Проверим режим загрузки:
+### Проверим режим загрузки
 
 ```
 ls /sys/firmware/efi/efivars
 ```
 Если этот каталог сущетвует - система загружена в режиме UEFI.
 
-
+### Разметим диск
 
 | Раздел    | Размер  | Тип  |
 |-----------|---------|------|
@@ -82,6 +87,10 @@ mount -o subvol=/@home,noatime,autodefrag,compress=zstd,discard=async,ssd,commit
 ```
 mount /dev/sdX1 /mnt/boot/efi
 ```
+
+## Установка и первичная настройка системы.
+
+
 ### Устанавим систему в корневой каталог
 ```
 pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware dhcpcd zsh vim git intel-ucode
