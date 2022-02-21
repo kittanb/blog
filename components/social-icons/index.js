@@ -4,6 +4,10 @@ import Facebook from './facebook.svg'
 import Youtube from './youtube.svg'
 import Linkedin from './linkedin.svg'
 import Twitter from './twitter.svg'
+import Vk from './vk.svg'
+import Skype from './skype.svg'
+import Telegram from './telegram.svg'
+import Discord from './discord.svg'
 
 // Icons taken from: https://simpleicons.org/
 
@@ -14,6 +18,10 @@ const components = {
   youtube: Youtube,
   linkedin: Linkedin,
   twitter: Twitter,
+  vk: Vk,
+  skype: Skype,
+  telegram: Telegram,
+  discord: Discord,
 }
 
 const SocialIcon = ({ kind, href, size = 8 }) => {
