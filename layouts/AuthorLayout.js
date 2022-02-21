@@ -1,7 +1,6 @@
-import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import SocialIcon from '@/components/social-icons'
 import { PageSEO } from '@/components/SEO'
-import siteMetadata from '@/data/siteMetadata'
 
 export default function AuthorLayout({ children, frontMatter }) {
   const { name, avatar, occupation, company, email, telegram, skype, github } = frontMatter
