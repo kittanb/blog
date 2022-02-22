@@ -30,7 +30,7 @@ module.exports = {
           css: {
             color: theme('colors.gray.700'),
             a: {
-              color: theme('colors.primary.500'),
+              color: theme('colors.blue.700'),
               '&:hover': {
                 color: `${theme('colors.primary.600')} !important`,
               },
@@ -57,8 +57,8 @@ module.exports = {
               backgroundColor: theme('colors.gray.800'),
             },
             code: {
-              color: theme('colors.amber.500'),
-              backgroundColor: theme('colors.gray.500'),
+              color: theme('colors.amber.400'),
+              backgroundColor: theme('colors.gray.700'),
               paddingLeft: '4px',
               paddingRight: '4px',
               paddingTop: '2px',
@@ -96,9 +96,9 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme('colors.gray.300'),
+            color: theme('colors.gray.100'),
             a: {
-              color: theme('colors.primary.500'),
+              color: theme('colors.rose.500'),
               '&:hover': {
                 color: `${theme('colors.primary.400')} !important`,
               },
