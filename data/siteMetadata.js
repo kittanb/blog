@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: 'kittan.ru',
   description: 'Мои статьи про open-source штуки. Здорово, если что-то тут будет полезно вам.',
   language: 'ru-ru',
-  theme: 'dark', // system, dark или light
+  theme: 'system', // system, dark или light
   siteUrl: 'https://kittan.ru',
   siteRepo: 'https://github.com/kittanb/blog',
   siteLogo: '/static/images/logo.png',
@@ -52,7 +52,7 @@ const siteMetadata = {
       metadata: '1',
       // theme example: light, dark, dark_dimmed, dark_high_contrast
       // transparent_dark, preferred_color_scheme, custom
-      theme: 'dark',
+      theme: 'light',
       // theme when dark mode
       darkTheme: 'transparent_dark',
       // If the theme option above is set to 'custom`
