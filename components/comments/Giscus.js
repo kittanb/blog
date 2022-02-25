@@ -59,5 +59,4 @@ const Giscus = ({ mapping }) => {
     </div>
   )
 }
-
 export default Giscus
