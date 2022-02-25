@@ -10,6 +10,7 @@ layout: PostLayout
 
 <TOCInline toc={props.toc} asDisclosure />
 
+---
 
 ## Предисловие  
 
@@ -19,15 +20,14 @@ layout: PostLayout
 
 Советую воспользоваться [руководством по установке](https://wiki.archlinux.org/title/Installation_guide) c ArchWiki и не следовать инструкции слепо. Хорошо, если вы будите понимать каждый этап установки.   
 
-Тут не описана загрузка и запись образа Arch Linux, как и загрузка с записанного носителя. Я хотел сконцентрироваться на тех вопросах, которые, по моему мнению могут вызвать сложности в понимании у новых пользователей. 
+Позже напишу статью про преимущества btrfs и как ими воспользоваться.
+
 
 ---
 
-## Подготовка
 
----
 
-### Разметка диска
+## Подготовка диска
 
 Для редактирования разделов используем [fdisk](https://wiki.archlinux.org/title/Fdisk).  
 
@@ -47,7 +47,7 @@ layout: PostLayout
 |`w`| запишет изменения |
 |`q`| закроет диалог    |
 
- - Создадим разделы для efi и btrfs:
+ - #### Создадим разделы для efi и btrfs
 
 | Раздел      | Размер| Тип             |Код типа в fdisk|
 |-------------|-------|-----------------|----------------|
@@ -56,25 +56,27 @@ layout: PostLayout
 
 ---
 
-### Создание файловой системы  
+- #### Создадим FAT32 на первом разделе 
+
+
+```
+$ mkfs.fat -F32 /dev/sdX1
+```
 
 ---
 
-- Создадим файловую систему FAT32 для раздела с efi:  
+- #### Создадим btrfs на втором разделе
 
-```
-mkfs.fat -F32 /dev/sdX1
-```
-
-- Создадим btrfs. Установим метку диска `MAIN`:
 
 ```
 mkfs.btrfs -L MAIN dev/sdX2
-```
+```  
+
+Ключ `-L` установит метку диска. Мы ставим её, чтобы потом иметь [доступ к btrfs из Windows.](https://github.com/maharmstone/btrfs)
 
 ---
 
-- Смонтируем btrfs:
+- #### Смонтируем раздел btrfs в `/mnt`
 
 ```
 mount /dev/sdX2 /mnt
@@ -86,7 +88,7 @@ cd /mnt
 
 ---
   
-- Создадим подразделы на смонтированном btrfs разделе:
+- #### Создадим подразделы на смонтированном btrfs разделе
 
 ```
 btrfs su cr @
@@ -98,7 +100,7 @@ btrfs su cr @home
 
 ---
 
-- Выйдем из `/mnt` и размонтируем btrfs раздел:
+- #### Выйдем из `/mnt` и размонтируем btrfs раздел
 
 ```
 cd
@@ -109,7 +111,7 @@ umount /mnt
 
 ---
 
-- Смонтируем подразделы btrfs и efi раздел:
+- #### Смонтируем подразделы btrfs и efi раздел
 ```
 mount -o subvol=/@,noatime,autodefrag,compress=zstd:1,discard=async,ssd,commit=120  /dev/sdX2 /mnt
 ```
@@ -134,7 +136,7 @@ mount /dev/sdX1 /mnt/boot/efi
 |`subvol`|имя подраздела btrfs|
 |`noatime`|отключает запись времени доступа к файлу|
 |`autodefrag`|включит автоматическую дефрагментацию|
-|`compress`|режим сжатия `zstd:1`|
+|`compress`|режим сжатия [zstd:1](https://btrfs.wiki.kernel.org/index.php/Compression#What_are_the_differences_between_compression_methods.3F)|
 |`discard`|будет освобождать неиспользуемые блоки с ssd, `async` группирует блоки для снижения нагрузки|
 |`ssd`|оптимизации для ssd|
 |`commit`|задаст интервал записи данных в файловую систему в секундах|
@@ -144,7 +146,7 @@ mount /dev/sdX1 /mnt/boot/efi
 ## Установка системы
 
 ---
-- Установим систему в корневой каталог:
+- #### Установим систему в корневой каталог
 
 ```
 pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware dhcpcd vim zsh
@@ -165,7 +167,9 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware dhcpcd 
 |`vim`|текстовые редактор|
 |`zsh`|командная оболочка|
 
-- Запишем информацию созданных нами файловых системах в `/etc/fstab`:
+---
+
+- #### Запишем информацию созданных нами файловых системах в `/etc/fstab`
 
 ```
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -177,14 +181,14 @@ genfstab -U /mnt >> /mnt/etc/fstab
 ## Базовая настройка
 ---
 
-- Сменим корневой каталог на тот, что установили:
+- #### Сменим корневой каталог на каталог с новой системой
 ```
 arch-chroot /mnt
 ```
 Сейчас система установлена на диск. Если установка привела к ошибке, то можно будет зайти в установленную систему через `arch-root` после перезагрузки. Не забудьте смонтировать файловые системы. При монтировании btrfs можно будет указать только параметр `subvol`.
 
 ---
-- Добавим имя новой системы и свяжем его с localhost:
+- #### Добавим имя новой системы и свяжем его с localhost
 ```
 echo metropolis > /etc/hostname
 ```
@@ -192,12 +196,12 @@ echo metropolis > /etc/hostname
 echo -e "127.0.0.1 localhost\n::0 localhost\n127.0.0.1 metropolis" >> /etc/hosts
 ```
 ---
-- Включим службу dhcpcd:
+- #### Включим службу dhcpcd
 ```
 systemctl enable dhcpcd
 ```
 ---
-- Установим локаль :
+- #### Установим локаль
 ```
 sed -i "s/#en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
 ```
@@ -208,12 +212,12 @@ locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 ```
 ---
-- Установим пароль root:
+- #### Установим пароль root
 ```
 passwd
 ```
 ---
-- Создадим пользователя:
+- #### Создадим пользователя
 ```
 useradd -m -G wheel -s /bin/zsh sonic
 ```
@@ -230,15 +234,11 @@ visudo -c
 
 
 ---
-- Установим загрузчик:
+## Настройка загрузчика
+---
+- #### Установим пакеты загрузчика
 ```
-pacman -S grub efibootmgr intel-ucode os-prober
-```
-```
-grub-install --efi-directory=/boot/efi
-```
-```
-grub-mkconfig -o /boot/grub/grub.cfg
+pacman -S grub efibootmgr intel-ucode
 ```  
 
 Список установленных пакетов:  
@@ -248,9 +248,18 @@ grub-mkconfig -o /boot/grub/grub.cfg
 |`grub`|[загрузчик ядра](https://wiki.archlinux.org/title/Arch_boot_process#Boot_loader)|
 |`efibootmgr`|[редактор загрузочных записей efi](https://man.archlinux.org/man/efibootmgr.8.en)|
 |`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|  
-
 ---
-- Размонтируем разделы и перезагрузим систему:
+- #### Установим grub в `boot/efi`
+```
+grub-install --efi-directory=/boot/efi
+```
+---
+- #### Запишем файл конфигурации grub
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+```  
+---
+- #### Размонтируем разделы и перезагрузимся в новую систему
 ```
 exit
 ```
