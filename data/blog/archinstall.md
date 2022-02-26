@@ -67,9 +67,8 @@ $ mkfs.fat -F32 /dev/sdX1
 
 - #### Создадим btrfs на втором разделе
 
-
 ```
-mkfs.btrfs -L MAIN dev/sdX2
+mkfs.btrfs -L MAIN /dev/sdX2
 ```  
 
 Ключ `-L` установит метку диска. Мы ставим её, чтобы потом иметь [доступ к btrfs из Windows.](https://github.com/maharmstone/btrfs)
@@ -81,9 +80,6 @@ mkfs.btrfs -L MAIN dev/sdX2
 ```
 mount /dev/sdX2 /mnt
 ```
-```
-cd /mnt
-```
 `/mnt` - каталог для ручного монтирования файловых систем
 
 ---
@@ -91,27 +87,25 @@ cd /mnt
 - #### Создадим подразделы на смонтированном btrfs разделе
 
 ```
-btrfs su cr @
+btrfs su cr /mnt/@
 ```
 ```
-btrfs su cr @home
+btrfs su cr /mnt/@home
 ```
 `btrfs su cr` - псевдоним для `btrfs subvolume create`. Название подразделов начинаются с `@` чтобы не путать их с другими каталогами.
 
 ---
 
-- #### Выйдем из `/mnt` и размонтируем btrfs раздел
+- #### Размонтируем btrfs раздел
+
 
 ```
-cd
-```
-```
-umount /mnt
+umount -R /mnt
 ```
 
 ---
 
-- #### Смонтируем подразделы btrfs и efi раздел
+- #### Смонтируем подразделы btrfs
 ```
 mount -o subvol=/@,noatime,autodefrag,compress=zstd:1,discard=async,ssd,commit=120  /dev/sdX2 /mnt
 ```
@@ -119,10 +113,11 @@ mount -o subvol=/@,noatime,autodefrag,compress=zstd:1,discard=async,ssd,commit=1
 mkdir /mnt/{boot,home}
 ```
 ```
-mkdir /mnt/boot/efi
-```
-```
 mount -o subvol=/@home,noatime,autodefrag,compress=zstd:1,discard=async,ssd,commit=120 /dev/sdX2 /mnt/home
+```
+- #### Смонтируем efi раздел
+```
+mkdir /mnt/boot/efi
 ```
 ```
 mount /dev/sdX1 /mnt/boot/efi
