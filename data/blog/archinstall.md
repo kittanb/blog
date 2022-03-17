@@ -107,13 +107,13 @@ umount -R /mnt
 
 - #### Смонтируем подразделы btrfs
 ```
-mount -o subvol=/@,noatime,autodefrag,compress=zstd:1,discard=async,ssd,commit=120  /dev/sdX2 /mnt
+mount -o subvol=/@,noatime,ssd_spread,compress=zstd:1,discard=async,ssd,commit=600  /dev/sdX2 /mnt
 ```
 ```
 mkdir /mnt/{boot,home}
 ```
 ```
-mount -o subvol=/@home,noatime,autodefrag,compress=zstd:1,discard=async,ssd,commit=120 /dev/sdX2 /mnt/home
+mount -o subvol=/@home,noatime,ssd_spread,compress=zstd:1,discard=async,ssd,commit=600 /dev/sdX2 /mnt/home
 ```
 - #### Смонтируем efi раздел
 ```
@@ -130,7 +130,7 @@ mount /dev/sdX1 /mnt/boot/efi
 |:-----------|:--|
 |`subvol`|имя подраздела btrfs|
 |`noatime`|отключает запись времени доступа к файлу|
-|`autodefrag`|включит автоматическую дефрагментацию|
+|`ssd_spread`|запись в пустые области диска, ускорит работу ssd|
 |`compress`|режим сжатия [zstd:1](https://btrfs.wiki.kernel.org/index.php/Compression#What_are_the_differences_between_compression_methods.3F)|
 |`discard`|будет освобождать неиспользуемые блоки с ssd, `async` группирует блоки для снижения нагрузки|
 |`ssd`|оптимизации для ssd|
@@ -144,7 +144,7 @@ mount /dev/sdX1 /mnt/boot/efi
 - #### Установим систему в корневой каталог
 
 ```
-pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware dhcpcd vim zsh
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager vim intel-ucode
 ```  
 
 `pacstrap` скрипт для установки пакетов в новый корневой каталог
@@ -158,9 +158,9 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware dhcpcd 
 |`linux-zen`|[ядро](https://wiki.archlinux.org/title/Kernel_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)) linux-zen|
 |`linux-zen-headers`|заголовки ядра linux-zen|
 |`linux-firmware`|драйвера устройств|
-|`dhcpcd`|dhcp клиент|
+|`networkmanager`|[набор инструментов](https://wiki.archlinux.org/title/NetworkManager) для настройки сети|
 |`vim`|текстовые редактор|
-|`zsh`|командная оболочка|
+|`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|  
 
 ---
 
@@ -191,9 +191,9 @@ echo metropolis > /etc/hostname
 echo -e "127.0.0.1 localhost\n::0 localhost\n127.0.0.1 metropolis" >> /etc/hosts
 ```
 ---
-- #### Включим службу dhcpcd
+- #### Включим службу NetworkManager
 ```
-systemctl enable dhcpcd
+systemctl enable NetworkManager
 ```
 ---
 - #### Установим локаль
@@ -214,7 +214,7 @@ passwd
 ---
 - #### Создадим пользователя
 ```
-useradd -m -G wheel -s /bin/zsh sonic
+useradd -mG wheel sonic
 ```
 ```
 passwd sonic
@@ -242,7 +242,7 @@ pacman -S grub efibootmgr intel-ucode
 |:-----------|:--|
 |`grub`|[загрузчик ядра](https://wiki.archlinux.org/title/Arch_boot_process#Boot_loader)|
 |`efibootmgr`|[редактор загрузочных записей efi](https://man.archlinux.org/man/efibootmgr.8.en)|
-|`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|  
+
 ---
 - #### Установим grub в `boot/efi`
 ```
