@@ -144,7 +144,7 @@ mount /dev/sdX1 /mnt/boot/efi
 - #### Установим систему в корневой каталог
 
 ```
-pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager vim intel-ucode
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager vim intel-ucode iucode-tool
 ```  
 
 `pacstrap` скрипт для установки пакетов в новый корневой каталог
@@ -160,7 +160,8 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware network
 |`linux-firmware`|драйвера устройств|
 |`networkmanager`|[набор инструментов](https://wiki.archlinux.org/title/NetworkManager) для настройки сети|
 |`vim`|текстовые редактор|
-|`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|  
+|`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|
+|`iucode-tool`||[управление обновлениями микрокода](https://gitlab.com/iucode-tool/iucode-tool/-/wikis/home)|
 
 ---
 
@@ -201,6 +202,9 @@ systemctl enable NetworkManager
 sed -i "s/#en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
 ```
 ```
+timedatectl set-timezone Europe/Moscow
+```
+```
 locale-gen
 ```
 ```
@@ -233,7 +237,7 @@ visudo -c
 ---
 - #### Установим пакеты загрузчика
 ```
-pacman -S grub efibootmgr intel-ucode
+pacman -S grub efibootmgr
 ```  
 
 Список установленных пакетов:  
