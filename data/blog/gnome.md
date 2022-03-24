@@ -12,7 +12,10 @@ images: []
 Привет! Сегодня мы подготовим наш [свежий Arch](https://www.kittan.ru/blog/archinstall) к работе в качестве домашнего десктопа.    
 Мы используем:  
 - проприетарный DKMS драйвер NVIDIA  
-- рабочий стол GNOME  
+- рабочий стол GNOME
+- zsh и p10k
+- yay (майонез)
+
  
 ---
 
@@ -25,9 +28,8 @@ images: []
 [multilib]
 Include=/etc/pacman.d/mirrorlist
 ```
-и сохраним файл.  
 
----
+---  
 
 - #### Обновим систему  
 ```
@@ -38,18 +40,23 @@ sudo pacman -Suy
 
 - #### Установим yay  
 
-[yay](https://github.com/Jguer/yay) - помощник AUR
-Создадим каталог для git и перейдём в него. Я сделаю это в Download.  
+[yay](https://github.com/Jguer/yay) - помощник AUR. Создадим каталог для git и перейдём в него. Я сделаю это в Download.  
 
 ```
 mkdir /home/sonic/Download/git
+```
+```
 cd Download/git/
 ```
 Клонируем репозиторий с yay и установим его с помощью [makepkg](https://wiki.archlinux.org/title/Makepkg)  
 
 ```
 git clone https://aur.archlinux.org/yay.git
+```
+```
 cd yay
+```
+```
 makepkg -si
 ```
 `-i` - установит пакет после сборки
@@ -161,7 +168,7 @@ reboot
 
 ---  
 
-- #### Установи zsh и powerlevel10k
+- #### Установим zsh и powerlevel10k
 ```
 sudo pacman -S zsh
 ```
@@ -178,7 +185,7 @@ echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zs
 ```
 exec zsh
 ```
-Выберем нужные нам опции в мастере настройки 'p10k'. Запустить после вручную его можно с помощью команды `p10k configure`.  
+Выберем нужные нам опции в мастере настройки `p10k`. Запустить после вручную его можно с помощью команды `p10k configure`.  
 
 ---  
 
