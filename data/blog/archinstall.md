@@ -144,7 +144,7 @@ mount /dev/sdX1 /mnt/boot/efi
 - #### Установим систему в корневой каталог
 
 ```
-pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager vim intel-ucode iucode-tool
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager vim git intel-ucode iucode-tool
 ```  
 
 `pacstrap` скрипт для установки пакетов в новый корневой каталог
@@ -159,7 +159,8 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware network
 |`linux-zen-headers`|заголовки ядра linux-zen|
 |`linux-firmware`|драйвера устройств|
 |`networkmanager`|[набор инструментов](https://wiki.archlinux.org/title/NetworkManager) для настройки сети|
-|`vim`|текстовые редактор|
+|`vim`|камсольный текстовые редактор|
+|`git`|[интерфейс для AUR](https://wiki.archlinux.org/title/git)|
 |`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|
 |`iucode-tool`||[управление обновлениями микрокода](https://gitlab.com/iucode-tool/iucode-tool/-/wikis/home)|
 
@@ -196,6 +197,12 @@ echo -e "127.0.0.1 localhost\n::0 localhost\n127.0.0.1 metropolis" >> /etc/hosts
 ```
 systemctl enable NetworkManager
 ```
+```
+systemctl mask NetworkManager-wait-online.service
+```
+`systemctl` - основная команда для управления [systemd](https://wiki.archlinux.org/title/systemd).  
+`mask` - делает невозможным запуск службы.  
+`NetworkManager-wait-online.service` - служба сетевого запуска. Ее отключение ускорит загрузку.  
 ---
 - #### Установим локаль
 ```
