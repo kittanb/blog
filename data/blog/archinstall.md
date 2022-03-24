@@ -203,13 +203,22 @@ systemctl mask NetworkManager-wait-online.service
 `systemctl` - основная команда для управления [systemd](https://wiki.archlinux.org/title/systemd).  
 `mask` - делает невозможным запуск службы.  
 `NetworkManager-wait-online.service` - служба сетевого запуска. Ее отключение ускорит загрузку.  
+
+---
+
+- #### Настроим время
+
+```
+timedatectl set-timezone Europe/Moscow
+```
+```
+timedatectl set-ntp true
+```
+
 ---
 - #### Установим локаль
 ```
 sed -i "s/#en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
-```
-```
-timedatectl set-timezone Europe/Moscow
 ```
 ```
 locale-gen
