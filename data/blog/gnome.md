@@ -29,6 +29,19 @@ images: []
 Include=/etc/pacman.d/mirrorlist
 ```
 
+Раз мы зашли сюда, раскомментируем еще и `Color` c `ParallelDownloads = 5` в разделе `Misc options`
+
+```
+# Misc options
+#UseSyslog
+Color
+#NoProgressBar
+CheckSpace
+#VerbosePkgLists
+ParallelDownloads = 5
+```
+Это включит параллельную загрузку и подсветку в терминале.  
+
 ---  
 
 - #### Обновим систему  
@@ -40,7 +53,10 @@ sudo pacman -Suy
 
 - #### Установим yay  
 
-[yay](https://github.com/Jguer/yay) - помощник AUR. Создадим каталог для git и перейдём в него. Я сделаю это в Download.  
+Одно из главных преимуществ Arch Linux - это Arch user repository. Тут много всякого, чего нет в официальных репозиториях. Удобно устанавливать и обновлять git версии приложений.  
+[yay](https://github.com/Jguer/yay) - один из помощников AUR. С помощью него можно устанавливать и обновлять пакеты из AUR или обычных репозиториев.  
+ Использование без ключей выполнит поиск пакета, содержащего искомые слова в названии или описании. Поиск идет по подключенным репозиториям и в AUR.  
+ Создадим каталог для git и перейдём в него. Я сделаю это в Download.  
 
 ```
 mkdir /home/sonic/Download/git
