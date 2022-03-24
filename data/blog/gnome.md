@@ -1,5 +1,5 @@
 ---
-title: Подготовка Arch для работы
+title: Рабочий стол на Arch
 date: '2022-03-17'
 tags: ['arch', 'gnome', 'linux']
 draft: false
@@ -9,22 +9,33 @@ images: []
 
 <TOCInline toc={props.toc} asDisclosure />
 
-Привет! 
+Привет! Сегодня мы подготовим наш [свежий Arch](https://www.kittan.ru/blog/archinstall) к работе в качестве домашнего десктопа.    
+Мы используем:  
+- проприетарный DKMS драйвер NVIDIA  
+- рабочий стол GNOME  
+ 
+---
 
 - #### Включим 32-битный репозиторий  
 
-Нам нужны будут некоторые зависимости оттуда.
-Для этого в `/etc/pacman.conf` раскомментируем строки ниже
+Нам нужны будут некоторые зависимости оттуда.  
+Для этого в `/etc/pacman.conf` раскомментируем репозиторий multilib:  
+
 ```
 [multilib]
 Include=/etc/pacman.d/mirrorlist
 ```
-и сохраним файл.
+и сохраним файл.  
+
+---
 
 - #### Обновим систему  
 ```
 sudo pacman -Suy
 ```
+
+---
+
 - #### Установим yay  
 
 [yay](https://github.com/Jguer/yay) - помощник AUR
@@ -44,6 +55,8 @@ makepkg -si
 `-i` - установит пакет после сборки
 `-s` - установит недостающие зависимости
 
+---
+
 - #### Установим X  
 ```
 sudo pacman -S xorg-server xorg-apps
@@ -54,6 +67,8 @@ sudo pacman -S xorg-server xorg-apps
 |:-----------|--|
 |`xorg-server`|X сервер|
 |`xorg-apps`|[группа пакетов](https://archlinux.org/groups/x86_64/xorg-apps/) с конфигами для X. Тут 35 пакетов, ого|
+
+---  
 
 - #### Установим драйвер NVIDIA и Vulkan
 ```
@@ -73,6 +88,7 @@ sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulka
 |`lib32-opencl-nvidia`|среда выполнения OpenCL для NVIDIA (32-bit)|
 |`libxnvctrl`|API для NVIDIA и X|
 
+---  
 
 - #### Установим Gnome  
 
@@ -101,6 +117,8 @@ reboot
 |`eog`|просмотр фото|
 |`file-roller`|архиватор|
 
+---  
+
 - #### Настроим драйвер NVIDIA  
 
 Сперва сгенерируем файл конфигурации X  
@@ -118,23 +136,49 @@ reboot
 sudo nvidia-settings
 ```
 
-Во вкладке `X Server XVideo Settings` выберем основной монитор
-Во вкладке `PowerMizer` в разделе `PowerMizer Settings` выберем `Prefer Maximum Performance`
-Во вкладке `X Server Display Configuration` выберем наше разрешение и частоту и сохраним `Save to X Configuration File`
-Запустим `nvidia-settings` без `sudo` и повторим всё настройки выше. Но не будем сохранять через `Save to X Configuration File`
+Во вкладке `X Server XVideo Settings` выберем основной монитор.  
+Во вкладке `PowerMizer` в разделе `PowerMizer Settings` выберем `Prefer Maximum Performance`.  
+Во вкладке `X Server Display Configuration` выберем наше разрешение и частоту и сохраним `Save to X Configuration File`.  
+Запустим `nvidia-settings` без `sudo` и повторим всё настройки выше. Но не будем сохранять через `Save to X Configuration File`.  
 
-- #### Добавляем модули ядра для NVIDIA и brtfs
+---  
 
-Отредактируем скрипт Initial ramdisk `/etc/mkinitcpio.conf`
-В строку `MODULES` добавим `nvidia nvidia_modeset nvidia_uvm nvidia_drm crc32c libcrc32c zlib_deflate btrfs`
-Теперь пересобираем образ ядра
+- #### Добавим модули ядра для NVIDIA и brtfs
+
+Отредактируем скрипт Initial ramdisk `/etc/mkinitcpio.conf`.  
+В строку `MODULES` добавим `nvidia nvidia_modeset nvidia_uvm nvidia_drm crc32c libcrc32c zlib_deflate btrfs`.  
+Теперь пересобираем образ ядра:  
 ```
 sudo mkinitcpio -P
 ```
-Обновляем загрузчик и перезагружаемся. Перекреститесь, если вы православный.
+Обновляем загрузчик и перезагружаемся.
 ```
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 ```
 reboot
 ```
+
+---  
+
+- #### Установи zsh и powerlevel10k
+```
+sudo pacman -S zsh
+```
+```
+sudo usermod -s /bin/zsh sonic
+```
+Перезапустим терминал. Выберем нужные нам опции в мастере настройки `zsh`
+```
+yay zsh-theme-powerlevel10k-git
+```
+```
+echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+```
+```
+exec zsh
+```
+Выберем нужные нам опции в мастере настройки 'p10k'. Запустить после вручную его можно с помощью команды `p10k configure`.  
+
+---  
+
