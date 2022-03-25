@@ -1,18 +1,20 @@
 ---
 title: Рабочий стол на Arch
 date: '2022-03-17'
-tags: ['arch', 'gnome', 'linux']
+tags: ['arch', 'gnome', 'kde', 'linux']
 draft: false
-summary: 
+summary: Подготовим Arch в качестве десктопа для работы и игорь
 images: []
 ---
+
+`Статья в разработке`
 
 <TOCInline toc={props.toc} asDisclosure />
 
 Привет! Сегодня мы подготовим наш [свежий Arch](https://www.kittan.ru/blog/archinstall) к работе в качестве домашнего десктопа.    
 Мы используем:  
 - проприетарный DKMS драйвер NVIDIA  
-- рабочий стол GNOME
+- рабочий стол KDE или GNOME
 - zsh и p10k
 - yay (майонез)
 
@@ -40,7 +42,7 @@ CheckSpace
 #VerbosePkgLists
 ParallelDownloads = 5
 ```
-Это включит параллельную загрузку и подсветку в терминале.  
+Это включит параллельную загрузку и подсветку в терминале.
 
 ---  
 
@@ -53,14 +55,15 @@ sudo pacman -Suy
 
 - #### Установим yay  
 
-Одно из главных преимуществ Arch Linux - это Arch user repository. В пользовательских репозиториях очень быстро появляются новые версии пакетов. 
+Одно из главных преимуществ Arch Linux - это Arch user repository. В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
 Скрипты с информацией о сборке пакетов тут не официальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR. 
-[yay](https://github.com/Jguer/yay) - один из помощников AUR. С помощью него можно устанавливать и обновлять пакеты из AUR или обычных репозиториев.  
+[yay](https://github.com/Jguer/yay) - один из помощников AUR. С его помощью можно устанавливать и обновлять пакеты из AUR и обычных репозиториев.  
  Использование без ключей выполнит поиск пакета, содержащего искомые слова в названии или описании. Поиск идет по подключенным репозиториям и в AUR.  
- Создадим каталог для git и перейдём в него. Я сделаю это в Download.  
+
+ Создадим каталог для git и перейдём в него. Я сделаю это в Download:  
 
 ```
-mkdir /home/sonic/Download/git
+mkdir ~/Download/git
 ```
 ```
 cd Download/git/
@@ -81,31 +84,11 @@ makepkg -si
 
 ---  
 
-- #### Установим zsh и powerlevel10k  
 
-```
-sudo pacman -S zsh
-```
-```
-sudo usermod -s /bin/zsh sonic
-```
-Перезапустим терминал. Выберем нужные нам опции в мастере настройки `zsh`
-```
-yay zsh-theme-powerlevel10k-git
-```
-```
-echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-```
-```
-exec zsh
-```
-Выберем нужные нам опции в мастере настройки `p10k`. Запустить после вручную его можно с помощью команды `p10k configure`.  
-
----
-
-## Настройка GUI
+## Установим видео
 
 - #### Установим X  
+
 ```
 sudo pacman -S xorg-server xorg-apps
 ```
@@ -129,7 +112,7 @@ sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulka
 |`nvidia-dkms`|[DKMS](https://wiki.archlinux.org/title/Dynamic_Kernel_Module_Support) проприетарный драйвер NVIDIA|
 |`nvidia-utils`|утилиты драйвера NVIDIA|
 |`lib32-nvidia-utils`|утилиты драйвера NVIDIA (32-bit)|
-|`nvidia-settings`|[Редактор опций NVIDIA](https://wiki.archlinux.org/title/NVIDIA#nvidia-settings)|
+|`nvidia-settings`|[редактор опций NVIDIA](https://wiki.archlinux.org/title/NVIDIA#nvidia-settings)|
 |`vulkan-icd-loader`|[графический API Vulkan](https://wiki.archlinux.org/title/Vulkan)|
 |`lib32-vulkan-icd-loader`|графический API Vulkan (32-bit)|
 |`opencl-nvidia`|[среда выполнения OpenCL](https://wiki.archlinux.org/title/GPGPU#OpenCL) для NVIDIA|
@@ -138,34 +121,7 @@ sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulka
 
 ---  
 
-- #### Установим Gnome  
 
-```
-sudo pacman -S gnome-shell gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
-```
-```
-sudo systemctl enable gdm
-```
-```
-reboot
-```
-
-Список установленных пакетов:  
-
-| Пакет   | Описание |
-|:-----------|:--|
-|`gnome-shell`|Gnome|
-|`gnome-terminal`|терминал|
-|`gnome-tweak-tool`|настройки для Gnome|
-|`gnome-control-center`|настройки для рабочего стола Gnome|
-|`xdg-user-dirs`|[менеджер пользовательских каталогов](https://wiki.archlinux.org/title/XDG_user_directories)|
-|`gdm`|[менеджер дисплея Gnome](https://wiki.archlinux.org/title/GDM)|
-|`gnome-keyring`|[хранитель паролей](https://wiki.archlinux.org/title/GNOME/Keyring)|
-|`nautilus`|файловый менеджер|
-|`eog`|просмотр фото|
-|`file-roller`|архиватор|
-
----  
 
 - #### Настроим драйвер NVIDIA  
 
@@ -209,4 +165,62 @@ reboot
 
 ---  
 
+- #### Установим zsh и powerlevel10k  
 
+```
+sudo pacman -S zsh
+```
+```
+sudo usermod -s /bin/zsh sonic
+```
+Перезапустим терминал. Выберем нужные нам опции в мастере настройки `zsh`
+```
+yay zsh-theme-powerlevel10k-git
+```
+```
+echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+```
+```
+exec zsh
+```
+Выберем нужные нам опции в мастере настройки `p10k`. Запустить вручную его можно с помощью команды `p10k configure`.  
+
+---
+
+- #### Установим Gnome  
+
+Минимальная установка:
+```
+sudo pacman -S gnome-shell gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
+```
+Cтандартная установка:
+```
+sudo pacman -S gnome gnome-extra
+```
+```
+sudo systemctl enable gdm
+```
+```
+reboot
+```
+
+Список установленных пакетов:  
+
+| Пакет   | Описание |
+|:-----------|:--|
+|`gnome-shell`|десктоп Gnome|
+|`gnome-terminal`|терминал|
+|`gnome-tweak-tool`|настройки для Gnome|
+|`gnome-control-center`|настройки для рабочего стола Gnome|
+|`xdg-user-dirs`|[менеджер пользовательских каталогов](https://wiki.archlinux.org/title/XDG_user_directories)|
+|`gdm`|[менеджер дисплея Gnome](https://wiki.archlinux.org/title/GDM)|
+|`gnome-keyring`|[хранитель паролей](https://wiki.archlinux.org/title/GNOME/Keyring)|
+|`nautilus`|файловый менеджер|
+|`eog`|просмотр фото|
+|`file-roller`|архиватор|
+Или
+|:-----------|:--|
+|`gnome`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome/) с десктопом и основными приложениями|
+|`gnome-extra`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome-extra/) с дополнительными приложениями|
+
+---  
