@@ -71,9 +71,11 @@ sudo pacman -Suy
 - #### Установим yay  
 
 Одно из главных преимуществ Arch Linux - это Arch user repository. В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
+
 Скрипты с информацией о сборке пакетов тут не официальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR, но будьте благоразумны.  
 
 [yay](https://github.com/Jguer/yay) - один из помощников AUR. С его помощью можно устанавливать и обновлять пакеты из AUR и обычных репозиториев.  
+
  Использование без ключей выполнит поиск пакета, содержащего искомые слова в названии или описании. Поиск идет по подключенным репозиториям и в AUR.  
 
  Создадим каталог для git и перейдём в него. Я сделаю это в Download:  
@@ -84,7 +86,7 @@ mkdir ~/Download/git
 ```
 cd Download/git/
 ```
-Клонируем репозиторий с yay и установим его с помощью [makepkg](https://wiki.archlinux.org/title/Makepkg)  
+Клонируем репозиторий с yay и установим его с помощью [makepkg](https://wiki.archlinux.org/title/Makepkg):  
 
 ```
 git clone https://aur.archlinux.org/yay.git
@@ -126,11 +128,12 @@ sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulka
 
 Отредактируем скрипт Initial ramdisk `/etc/mkinitcpio.conf`.  
 В строку `MODULES` добавим `nvidia nvidia_modeset nvidia_uvm nvidia_drm crc32c libcrc32c zlib_deflate btrfs`.  
+
 Теперь пересобираем образ ядра:  
 ```
 sudo mkinitcpio -P
 ```
-Обновляем загрузчик и перезагружаемся:  
+Обновляем загрузчик:  
 ```
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -147,6 +150,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 - Gnome полностью построен на GTK, а Plasma на Qt
 - В дизайне интерфейса для Gnome на первом месте пользовательский опыт, а для Plasma - функциональность
+- Gnome использует новые графический сервер Wayland по умолчанию и неплохо с ним работает. У KDE с Wayland всё еще могут [быть](https://community.kde.org/KWin/Wayland) какие-то проблемы. А могут и [не быть](https://www.phoronix.com/scan.php?page=news_item&px=Qt-Wayland-NVIDIA-Thread), лучше проверьте работу своей системы c Plasma сперва с Wayland.
 
 Выберете полную или минимальную установку этих [DE](https://wiki.archlinux.org/title/desktop_environment).  
 
@@ -190,8 +194,6 @@ reboot
 |`nautilus`|файловый менеджер|
 |`eog`|просмотр фото|
 |`file-roller`|архиватор|
-Или
-|:-----------|:--|
 |`gnome`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome/) с десктопом и основными приложениями|
 |`gnome-extra`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome-extra/) с дополнительными приложениями|
 
