@@ -1,7 +1,7 @@
 ---
 title: Рабочий стол на Arch
 date: '2022-03-17'
-tags: ['arch', 'gnome', 'kde', 'linux']
+tags: ['arch', 'gnome', 'KDE', 'linux']
 draft: false
 summary: Подготовим Arch в качестве десктопа для работы и игорь
 images: []
@@ -13,6 +13,7 @@ images: []
 
 Привет! Сегодня мы подготовим наш [свежий Arch](https://www.kittan.ru/blog/archinstall) к работе в качестве домашнего десктопа.    
 Мы используем:  
+
 - проприетарный DKMS драйвер NVIDIA  
 - рабочий стол KDE или GNOME
 - zsh и p10k
@@ -29,7 +30,21 @@ images: []
 ```
 [multilib]
 Include=/etc/pacman.d/mirrorlist
+```  
+
+Если хотите получить доступ к тестовой версии Plasma, то в конце `/etc/pacman.conf` добавьте:  
+
 ```
+[kde-unstable]
+Include = /etc/pacman.d/mirrorlist
+```  
+
+А если к тестовой версии Gnome, то:  
+
+```
+[gnome-unstable]
+Include = /etc/pacman.d/mirrorlist
+```  
 
 Раз мы зашли сюда, раскомментируем еще и `Color` c `ParallelDownloads = 5` в разделе `Misc options`
 
@@ -56,7 +71,8 @@ sudo pacman -Suy
 - #### Установим yay  
 
 Одно из главных преимуществ Arch Linux - это Arch user repository. В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
-Скрипты с информацией о сборке пакетов тут не официальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR. 
+Скрипты с информацией о сборке пакетов тут не официальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR, но будьте благоразумны.  
+
 [yay](https://github.com/Jguer/yay) - один из помощников AUR. С его помощью можно устанавливать и обновлять пакеты из AUR и обычных репозиториев.  
  Использование без ключей выполнит поиск пакета, содержащего искомые слова в названии или описании. Поиск идет по подключенным репозиториям и в AUR.  
 
@@ -84,22 +100,7 @@ makepkg -si
 
 ---  
 
-
-## Установим видео
-
-- #### Установим X  
-
-```
-sudo pacman -S xorg-server xorg-apps
-```
-Список установленных пакетов:  
-
-| Пакет   | Описание |
-|:-----------|--|
-|`xorg-server`|X сервер|
-|`xorg-apps`|[группа пакетов](https://archlinux.org/groups/x86_64/xorg-apps/) с конфигами для X. Тут 35 пакетов, ого|
-
----  
+## Установка и настройка драйвера NVIDIA
 
 - #### Установим драйвер NVIDIA и Vulkan
 ```
@@ -121,32 +122,6 @@ sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulka
 
 ---  
 
-
-
-- #### Настроим драйвер NVIDIA  
-
-Сперва сгенерируем файл конфигурации X  
-
-```
-sudo nvidia-xconfig
-```
-```
-reboot
-```
-
-Теперь запустим настройки NVIDIA  
-
-```
-sudo nvidia-settings
-```
-
-Во вкладке `X Server XVideo Settings` выберем основной монитор.  
-Во вкладке `PowerMizer` в разделе `PowerMizer Settings` выберем `Prefer Maximum Performance`.  
-Во вкладке `X Server Display Configuration` выберем наше разрешение и частоту и сохраним `Save to X Configuration File`.  
-Запустим `nvidia-settings` без `sudo` и повторим всё настройки выше. Но не будем сохранять через `Save to X Configuration File`.  
-
----  
-
 - #### Добавим модули ядра для NVIDIA и brtfs
 
 Отредактируем скрипт Initial ramdisk `/etc/mkinitcpio.conf`.  
@@ -155,48 +130,45 @@ sudo nvidia-settings
 ```
 sudo mkinitcpio -P
 ```
-Обновляем загрузчик и перезагружаемся.
+Обновляем загрузчик и перезагружаемся:  
 ```
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-```
-```
-reboot
 ```
 
 ---  
 
-- #### Установим zsh и powerlevel10k  
 
-```
-sudo pacman -S zsh
-```
-```
-sudo usermod -s /bin/zsh sonic
-```
-Перезапустим терминал. Выберем нужные нам опции в мастере настройки `zsh`
-```
-yay zsh-theme-powerlevel10k-git
-```
-```
-echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-```
-```
-exec zsh
-```
-Выберем нужные нам опции в мастере настройки `p10k`. Запустить вручную его можно с помощью команды `p10k configure`.  
 
----
+## Установка DE
+
+Сейчас я использую GNOME и KDE Plasma, поэтому опишу их установку.  
+
+На мой взгляд, основные отличия Gnome от Plasma:  
+
+- Gnome полностью построен на GTK, а Plasma на Qt
+- В дизайне интерфейса для Gnome на первом месте пользовательский опыт, а для Plasma - функциональность
+
+Выберете полную или минимальную установку этих [DE](https://wiki.archlinux.org/title/desktop_environment).  
+
+Если вы еще не очень разбираетесь - ставьте полные группы пакетов и удаляйте ненужное. Такой подход уменьшит количество вероятных ошибок в работе DE. В противном случае ставьте минимальную версию и добавляйте нужные вам пакеты из полных групп.  
 
 - #### Установим Gnome  
+
+GNOME использует [Wayland](https://wiki.archlinux.org/title/wayland) по умолчанию.  
 
 Минимальная установка:
 ```
 sudo pacman -S gnome-shell gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
 ```
-Cтандартная установка:
+Полная установка:
 ```
 sudo pacman -S gnome gnome-extra
 ```
+
+---  
+
+Включим GPM и перезапустим систему:  
+
 ```
 sudo systemctl enable gdm
 ```
@@ -224,3 +196,90 @@ reboot
 |`gnome-extra`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome-extra/) с дополнительными приложениями|
 
 ---  
+
+- #### Установим KDE Plasma
+
+KDE установим с Xorg и поддержкой Wayland сессий  
+
+Минимальная установка:
+```
+sudo pacman -S xorg-server xorg-apps plasma-wayland-session plasma-desktop sddm plasma-nm plasma-pa dolphin konsole kdeplasma-addons kde-gtk-config
+```
+Обычная установка:
+```
+sudo pacman -S xorg-server xorg-apps plasma-wayland-session plasma kde-applications
+```
+Список установленных пакетов:  
+
+| Пакет   | Описание |
+|:-----------|--|
+|`xorg-server`|Xorg сервер|
+|`xorg-apps`|[группа пакетов](https://archlinux.org/groups/x86_64/xorg-apps/) с конфигами для X|
+|`plasma-wayland-session`|Wayland сессия Plasma|
+|`plasma-desktop`|десктоп Plasma|
+|`sddm`|[менеджер дисплея KDE](https://wiki.archlinux.org/title/SDDM)|
+|`plasma-nm`|апплет Plasma для NetworkManager|
+|`plasma-pa`|апплет Plasma для PulseAudio|
+|`dolphin`|файловый менеджер|
+|`konsole`|терминал|
+|`kdeplasma-addons`|улучшения для Plasma|
+|`kde-gtk-config`|интеграция с GTK приложениями|
+Или
+|:-----------|:--|
+|`plasma`|[группа пакетов](https://archlinux.org/groups/x86_64/plasma/) с десктопом и основными приложениями|
+|`kde-applications`|[группа пакетов](https://archlinux.org/groups/x86_64/kde-applications/) с группами дополнительных приложениями(350 пакетов!)|
+
+Вместо kde-application можно выбрать только нужные вам группы [тут](https://archlinux.org/packages/extra/any/kde-applications-meta/) или [тут](https://archlinux.org/packages/kde-unstable/any/kde-applications-meta/)
+
+
+---  
+
+## Начальная настройка  
+
+- #### Настроим драйвер NVIDIA  
+
+Сперва сгенерируем файл конфигурации X  
+
+```
+sudo nvidia-xconfig
+```
+```
+reboot
+```
+
+Теперь запустим настройки NVIDIA  
+
+```
+sudo nvidia-settings
+```
+
+Во вкладке `X Server XVideo Settings` выберем основной монитор.  
+Во вкладке `PowerMizer` в разделе `PowerMizer Settings` выберем `Prefer Maximum Performance`.  
+Во вкладке `X Server Display Configuration` выберем наше разрешение и частоту и сохраним `Save to X Configuration File`.  
+Запустим `nvidia-settings` без `sudo` и повторим всё настройки выше. Но не будем сохранять через `Save to X Configuration File`.  
+
+---  
+
+
+- #### Установим zsh и powerlevel10k  
+
+```
+sudo pacman -S zsh
+```
+```
+sudo usermod -s /bin/zsh sonic
+```
+Перезапустим терминал. Выберем нужные нам опции в мастере настройки `zsh`
+```
+yay zsh-theme-powerlevel10k-git
+```
+```
+echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+```
+```
+exec zsh
+```
+Выберем нужные нам опции в мастере настройки `p10k`. Запустить вручную его можно с помощью команды `p10k configure`.  
+
+---
+
