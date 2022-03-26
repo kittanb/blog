@@ -234,8 +234,9 @@ passwd
 ---
 - #### Создадим пользователя
 ```
-useradd -mG wheel sonic
+useradd -m sonic
 ```
+ключ `-m` создаст пользовательский каталог `/home/sonic`
 ```
 passwd sonic
 ```
@@ -282,7 +283,7 @@ exit
 umount -R /mnt
 ```
 ```
-shutdown -r now
+reboot
 ```  
 
 Теперь система установлена. Дальше я рекомендую прочитать [общии рекомендации](https://wiki.archlinux.org/title/General_recommendations).  

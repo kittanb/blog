@@ -11,7 +11,8 @@ images: []
 
 <TOCInline toc={props.toc} asDisclosure />
 
-Привет! Сегодня мы подготовим наш [свежий Arch](https://www.kittan.ru/blog/archinstall) к работе в качестве домашнего десктопа.    
+Привет! Сегодня мы подготовим наш [свежий Arch](https://www.kittan.ru/blog/archinstall) к работе в качестве домашнего десктопа.  
+
 Мы используем:  
 
 - проприетарный DKMS драйвер NVIDIA  
@@ -70,7 +71,7 @@ sudo pacman -Suy
 
 - #### Установим yay  
 
-Одно из главных преимуществ Arch Linux - это Arch user repository. В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
+Одно из главных преимуществ Arch Linux - это Arch User Repository (AUR). В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
 
 Скрипты с информацией о сборке пакетов тут не официальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR, но будьте благоразумны.  
 
@@ -150,7 +151,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 - Gnome полностью построен на GTK, а Plasma на Qt
 - В дизайне интерфейса для Gnome на первом месте пользовательский опыт, а для Plasma - функциональность
-- Gnome использует новые графический сервер Wayland по умолчанию и неплохо с ним работает. У KDE с Wayland всё еще могут [быть](https://community.kde.org/KWin/Wayland) какие-то проблемы. А могут и [не быть](https://www.phoronix.com/scan.php?page=news_item&px=Qt-Wayland-NVIDIA-Thread), лучше проверьте работу своей системы c Plasma сперва с Wayland.
+- Gnome использует новый графический сервер Wayland по умолчанию и неплохо с ним работает. У KDE с Wayland всё еще могут [быть](https://community.kde.org/KWin/Wayland) какие-то проблемы. А могут и [не быть](https://www.phoronix.com/scan.php?page=news_item&px=Qt-Wayland-NVIDIA-Thread), лучше проверьте работу своей системы на Plasma сперва с Wayland.
 
 Выберете полную или минимальную установку этих [DE](https://wiki.archlinux.org/title/desktop_environment).  
 
@@ -201,7 +202,7 @@ reboot
 
 - #### Установим KDE Plasma
 
-KDE установим с Xorg и поддержкой Wayland сессий  
+KDE установим с Xorg и поддержкой Wayland сессий. Выбрать тип сессии можно в окне SDDM (когда вводите пароль).  
 
 Минимальная установка:
 ```
@@ -229,8 +230,18 @@ sudo pacman -S xorg-server xorg-apps plasma-wayland-session plasma kde-applicati
 |`plasma`|[группа пакетов](https://archlinux.org/groups/x86_64/plasma/) с десктопом и основными приложениями|
 |`kde-applications`|[группа пакетов](https://archlinux.org/groups/x86_64/kde-applications/) с группами дополнительных приложениями(350 пакетов!)|
 
-Вместо kde-application можно выбрать только нужные вам группы [тут](https://archlinux.org/packages/extra/any/kde-applications-meta/) или [тут](https://archlinux.org/packages/kde-unstable/any/kde-applications-meta/)
+Вместо kde-application можно выбрать только нужные вам группы [тут](https://archlinux.org/packages/extra/any/kde-applications-meta/) или [тут](https://archlinux.org/packages/kde-unstable/any/kde-applications-meta/)  
 
+---  
+
+Включим SDDM и перезапустим систему:  
+
+```
+sudo systemctl enable sddm
+```
+```
+reboot
+```
 
 ---  
 
