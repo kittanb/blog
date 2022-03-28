@@ -32,7 +32,7 @@ images: []
 Include=/etc/pacman.d/mirrorlist
 ```  
 
-Если хотите получить доступ к тестовой версии Plasma, то в конце `/etc/pacman.conf` добавьте:  
+Если хотите получить доступ к тестовой версии Plasma, то в начале списка репозиториев (перед записью [testing]) в `/etc/pacman.conf` добавьте:  
 
 ```
 [kde-unstable]
