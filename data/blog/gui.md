@@ -17,7 +17,8 @@ images: []
 - рабочий стол KDE или GNOME
 - yay (майонез)
 - zramd в качестве SWAP
-- nftables в качестве брандмауэра
+- nftables как брандмауэра
+- timeshift для резервного копирования
 
 ## Подготовка
 ---
@@ -322,7 +323,7 @@ yay timeshift
 - В разделе `Select Snapshot Type` выберем `BTRFS`
 - В разделе `Select Snapshot Location` выберем наш раздел с`BTRFS`
 - В разделе `Select Snapshot Levels` выберем нужное нам расписание
-- В разделе `User Home Directories` оставим пустым чекбокс 'Include @home su in backup`
+- В разделе `User Home Directories` оставим пустым чекбокс `Include @home su in backup`
 - Теперь жмем `Finish`
 - В открывшимся интерфейсе `TimeShift` нажмем `Create`. Это запустит создание первого снапшота.  
 
