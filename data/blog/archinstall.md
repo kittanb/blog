@@ -162,7 +162,7 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware network
 |`vim`|камсольный текстовые редактор|
 |`git`|[интерфейс для AUR](https://wiki.archlinux.org/title/git)|
 |`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|
-|`iucode-tool`||[управление обновлениями микрокода](https://gitlab.com/iucode-tool/iucode-tool/-/wikis/home)|
+|`iucode-tool`|[управление обновлениями микрокода](https://gitlab.com/iucode-tool/iucode-tool/-/wikis/home)|
 
 ---
 
@@ -274,7 +274,9 @@ grub-install --efi-directory=/boot/efi
 ```
 grub-mkconfig -o /boot/grub/grub.cfg
 ```  
----
+
+---  
+
 - #### Размонтируем разделы и перезагрузимся в новую систему
 ```
 exit
@@ -286,8 +288,8 @@ umount -R /mnt
 reboot
 ```  
 
-Теперь система установлена. Дальше я рекомендую прочитать [общии рекомендации](https://wiki.archlinux.org/title/General_recommendations).  
+Теперь система установлена. Теперь я рекомендую прочитать и выполнить [общии рекомендации](https://wiki.archlinux.org/title/General_recommendations) с ArchWiki.  
 
-Позже добавлю статьи по настройке Arch Linux после установки и по работе с btrfs.  
+Дальше я [установлю графический интерфейс](https://www.kittan.ru/blog/gui) и подготовлю систему к работе.
 
 Надеюсь, эта статья смогла вам помочь! Если у вас остались вопросы, то я могу ответить на них в комментариях.
