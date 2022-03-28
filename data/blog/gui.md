@@ -3,11 +3,9 @@ title: Рабочий стол на Arch
 date: '2022-03-17'
 tags: ['arch', 'gnome', 'KDE', 'linux']
 draft: false
-summary: Подготовим Arch в качестве десктопа для работы и игорь
+summary: Подготовим Arch в качестве десктопа для работы и игорь.
 images: []
 ---
-
-`Статья в разработке`
 
 <TOCInline toc={props.toc} asDisclosure />
 
@@ -17,8 +15,9 @@ images: []
 
 - проприетарный DKMS драйвер NVIDIA  
 - рабочий стол KDE или GNOME
-- zsh и p10k
 - yay (майонез)
+- zramd в качестве SWAP
+- nftables в качестве брандмауэра
 
 ## Подготовка
 ---
@@ -249,7 +248,7 @@ reboot
 
 - #### Настроим драйвер NVIDIA  
 
-Сперва сгенерируем файл конфигурации X  
+Сперва сгенерируем файл конфигурации X сервера:  
 
 ```
 sudo nvidia-xconfig
@@ -271,26 +270,36 @@ sudo nvidia-settings
 
 ---  
 
+- #### Установим брандмауэр  
 
-- #### Установим zsh и powerlevel10k  
+Установим и запустим службу `nftables':    
 
 ```
-sudo pacman -S zsh
+sudo pacman -S nftables
 ```
 ```
-sudo usermod -s /bin/zsh sonic
+sudo systemctl enable --now nftables
 ```
-Перезапустим терминал. Выберем нужные нам опции в мастере настройки `zsh`
+
+Нас интересует простой брандмауэр. В `nftables` есть дефолтная конфигурация, которая лежит в `/etc/nftables.conf`. Правила из этого файла загружаются при запуске службы `nftables.service`, значит ничего больше нам делать не нужно.  
+
+ 
+---  
+
+- #### Настроим файл подкачки  
+
+`zramd` - служба, создающая файл подкачки в памяти. Я использую её вместо файла подкачки.
+
+Установим и запустим службу `zramd`:
+
 ```
-yay zsh-theme-powerlevel10k-git
+sudo pacman -S zramd
 ```
 ```
-echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+sudo systemctl enable --now zramd
 ```
-```
-exec zsh
-```
-Выберем нужные нам опции в мастере настройки `p10k`. Запустить вручную его можно с помощью команды `p10k configure`.  
+
+Теперь вывод `lsblk` покажет нам, что в SWAP смонтирован и его объем равен оперативной памяти.  
 
 ---
 
