@@ -1,7 +1,7 @@
 ---
 title: Установка Arch Linux
 date: '2022-02-16'
-tags: ['arch', 'btrfs', 'linux']
+tags: ['arch', 'btrfs']
 draft: false
 summary: Описана установка на ssd с btrfs и efi.
 layout: PostLayout
