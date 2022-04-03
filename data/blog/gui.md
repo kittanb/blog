@@ -1,7 +1,7 @@
 ---
 title: Рабочий стол на Arch
 date: '2022-03-17'
-tags: ['arch', 'gnome', 'KDE', 'linux']
+tags: ['arch', 'nvidia', 'gnome', 'KDE', 'zramd', 'nftables', 'timeshift']
 draft: false
 summary: Подготовим Arch в качестве десктопа для работы и игорь.
 images: []
@@ -69,41 +69,109 @@ sudo pacman -Suy
 
 ---
 
-- #### Установим yay  
 
-Одно из главных преимуществ Arch Linux - это Arch User Repository (AUR). В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
 
-Скрипты с информацией о сборке пакетов тут неофициальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR, но будьте благоразумны.  
 
-[yay](https://github.com/Jguer/yay) - один из помощников AUR. С его помощью можно устанавливать и обновлять пакеты из AUR и обычных репозиториев.  
+## Установка DE
 
- Использование без ключей выполнит поиск пакета, содержащего искомые слова в названии или описании. Поиск идет по подключенным репозиториям и в AUR.  
+Сейчас я использую GNOME и KDE Plasma, поэтому опишу их установку.  
 
- Создадим каталог для git и перейдём в него. Я сделаю это в Download:  
+На мой взгляд, основные отличия Gnome от Plasma:  
+
+- Gnome полностью построен на GTK, а Plasma на Qt
+- В дизайне интерфейса для Gnome на первом месте пользовательский опыт, а для Plasma - функциональность
+- Gnome использует новый графический сервер Wayland по умолчанию и неплохо с ним работает. У KDE с Wayland всё еще могут [быть](https://community.kde.org/KWin/Wayland) какие-то проблемы. А могут и [не быть](https://www.phoronix.com/scan.php?page=news_item&px=Qt-Wayland-NVIDIA-Thread), лучше проверьте работу своей системы на Plasma сперва с Wayland. У меня 1050 и с проприетарным драйвером wayland работает пока плохо. Хотя, возможно, у меня что-то плохое с руками. 
+
+
+Выберете полную или минимальную установку этих [DE](https://wiki.archlinux.org/title/desktop_environment).  
+
+Если вы еще не очень разбираетесь - ставьте полные группы пакетов и удаляйте ненужное. Такой подход уменьшит количество вероятных ошибок в работе DE. В противном случае ставьте минимальную версию и добавляйте нужные вам пакеты из полных групп.  
+
+- #### Установим Gnome  
+
+GNOME использует [Wayland](https://wiki.archlinux.org/title/wayland) по умолчанию.  
+
+- Минимальная установка:
+```
+sudo pacman -S gnome-shell gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
+```
+- Полная установка:
+```
+sudo pacman -S gnome gnome-extra
+```
+
+---  
+
+- #### Включим GDM:  
 
 ```
-mkdir ~/Download/git
+sudo systemctl enable gdm
 ```
+
+
+Список установленных пакетов:  
+
+| Пакет   | Описание |
+|:-----------|:--|
+|`gnome-shell`|десктоп Gnome|
+|`gnome-terminal`|терминал|
+|`gnome-tweak-tool`|настройки для Gnome|
+|`gnome-control-center`|настройки для рабочего стола Gnome|
+|`xdg-user-dirs`|[менеджер пользовательских каталогов](https://wiki.archlinux.org/title/XDG_user_directories)|
+|`gdm`|[менеджер дисплея Gnome](https://wiki.archlinux.org/title/GDM)|
+|`gnome-keyring`|[хранитель паролей](https://wiki.archlinux.org/title/GNOME/Keyring)|
+|`nautilus`|файловый менеджер|
+|`eog`|просмотр фото|
+|`file-roller`|архиватор|
+|`gnome`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome/) с десктопом и основными приложениями|
+|`gnome-extra`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome-extra/) с дополнительными приложениями|
+
+---  
+
+- #### Установим KDE Plasma
+
+KDE установим с Xorg. Выбрать тип сессии можно в окне SDDM (когда вводите пароль).  
+
+- Минимальная установка:
 ```
-cd Download/git/
+sudo pacman -S xorg-server xorg-apps plasma-desktop sddm plasma-nm plasma-pa dolphin konsole kdeplasma-addons kde-gtk-config
 ```
-Клонируем репозиторий с yay и установим его с помощью [makepkg](https://wiki.archlinux.org/title/Makepkg):  
+- Обычная установка:
+```
+sudo pacman -S xorg-server xorg-apps plasma kde-applications
+```
+Список установленных пакетов:  
+
+| Пакет   | Описание |
+|:-----------|--|
+|`xorg-server`|Xorg сервер|
+|`xorg-apps`|[группа пакетов](https://archlinux.org/groups/x86_64/xorg-apps/) с конфигами для X|
+|`plasma-desktop`|десктоп Plasma|
+|`sddm`|[менеджер дисплея KDE](https://wiki.archlinux.org/title/SDDM)|
+|`plasma-nm`|апплет Plasma для NetworkManager|
+|`plasma-pa`|апплет Plasma для PulseAudio|
+|`dolphin`|файловый менеджер|
+|`konsole`|терминал|
+|`kdeplasma-addons`|улучшения для Plasma|
+|`kde-gtk-config`|интеграция с GTK приложениями|
+|`plasma`|[группа пакетов](https://archlinux.org/groups/x86_64/plasma/) с десктопом и основными приложениями|
+|`kde-applications`|[группа пакетов](https://archlinux.org/groups/x86_64/kde-applications/) с группами дополнительных приложениями(350 пакетов!)|
+
+Вместо kde-application можно выбрать только нужные вам группы [тут](https://archlinux.org/packages/extra/any/kde-applications-meta/) или [тут](https://archlinux.org/packages/kde-unstable/any/kde-applications-meta/)  
+
+---  
+
+- #### Включим SDDM:  
 
 ```
-git clone https://aur.archlinux.org/yay.git
+sudo systemctl enable sddm
 ```
-```
-cd yay
-```
-```
-makepkg -si
-```
-`-i` - установит пакет после сборки  
-`-s` - установит недостающие зависимости
 
 ---  
 
 ## Установка драйвера NVIDIA
+
+Установим проприетарный DKMS драйвер NVIDIA. Иногда запускаю игры и мне нужна производительность. А DKMS позволит нам не возиться с модулями ядра при обновлении.  
 
 - #### Установим драйвер NVIDIA и Vulkan
 ```
@@ -138,114 +206,9 @@ sudo mkinitcpio -P
 ```
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
-
----  
-
-
-
-## Установка DE
-
-Сейчас я использую GNOME и KDE Plasma, поэтому опишу их установку.  
-
-На мой взгляд, основные отличия Gnome от Plasma:  
-
-- Gnome полностью построен на GTK, а Plasma на Qt
-- В дизайне интерфейса для Gnome на первом месте пользовательский опыт, а для Plasma - функциональность
-- Gnome использует новый графический сервер Wayland по умолчанию и неплохо с ним работает. У KDE с Wayland всё еще могут [быть](https://community.kde.org/KWin/Wayland) какие-то проблемы. А могут и [не быть](https://www.phoronix.com/scan.php?page=news_item&px=Qt-Wayland-NVIDIA-Thread), лучше проверьте работу своей системы на Plasma сперва с Wayland.
-
-Выберете полную или минимальную установку этих [DE](https://wiki.archlinux.org/title/desktop_environment).  
-
-Если вы еще не очень разбираетесь - ставьте полные группы пакетов и удаляйте ненужное. Такой подход уменьшит количество вероятных ошибок в работе DE. В противном случае ставьте минимальную версию и добавляйте нужные вам пакеты из полных групп.  
-
-- #### Установим Gnome  
-
-GNOME использует [Wayland](https://wiki.archlinux.org/title/wayland) по умолчанию.  
-
-Минимальная установка:
-```
-sudo pacman -S gnome-shell gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
-```
-Полная установка:
-```
-sudo pacman -S gnome gnome-extra
-```
-
----  
-
-Включим GPM и перезапустим систему:  
-
-```
-sudo systemctl enable gdm
-```
 ```
 reboot
-```
-
-Список установленных пакетов:  
-
-| Пакет   | Описание |
-|:-----------|:--|
-|`gnome-shell`|десктоп Gnome|
-|`gnome-terminal`|терминал|
-|`gnome-tweak-tool`|настройки для Gnome|
-|`gnome-control-center`|настройки для рабочего стола Gnome|
-|`xdg-user-dirs`|[менеджер пользовательских каталогов](https://wiki.archlinux.org/title/XDG_user_directories)|
-|`gdm`|[менеджер дисплея Gnome](https://wiki.archlinux.org/title/GDM)|
-|`gnome-keyring`|[хранитель паролей](https://wiki.archlinux.org/title/GNOME/Keyring)|
-|`nautilus`|файловый менеджер|
-|`eog`|просмотр фото|
-|`file-roller`|архиватор|
-|`gnome`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome/) с десктопом и основными приложениями|
-|`gnome-extra`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome-extra/) с дополнительными приложениями|
-
----  
-
-- #### Установим KDE Plasma
-
-KDE установим с Xorg и поддержкой Wayland сессий. Выбрать тип сессии можно в окне SDDM (когда вводите пароль).  
-
-Минимальная установка:
-```
-sudo pacman -S xorg-server xorg-apps plasma-wayland-session plasma-desktop sddm plasma-nm plasma-pa dolphin konsole kdeplasma-addons kde-gtk-config
-```
-Обычная установка:
-```
-sudo pacman -S xorg-server xorg-apps plasma-wayland-session plasma kde-applications
-```
-Список установленных пакетов:  
-
-| Пакет   | Описание |
-|:-----------|--|
-|`xorg-server`|Xorg сервер|
-|`xorg-apps`|[группа пакетов](https://archlinux.org/groups/x86_64/xorg-apps/) с конфигами для X|
-|`plasma-wayland-session`|Wayland сессия Plasma|
-|`plasma-desktop`|десктоп Plasma|
-|`sddm`|[менеджер дисплея KDE](https://wiki.archlinux.org/title/SDDM)|
-|`plasma-nm`|апплет Plasma для NetworkManager|
-|`plasma-pa`|апплет Plasma для PulseAudio|
-|`dolphin`|файловый менеджер|
-|`konsole`|терминал|
-|`kdeplasma-addons`|улучшения для Plasma|
-|`kde-gtk-config`|интеграция с GTK приложениями|
-|`plasma`|[группа пакетов](https://archlinux.org/groups/x86_64/plasma/) с десктопом и основными приложениями|
-|`kde-applications`|[группа пакетов](https://archlinux.org/groups/x86_64/kde-applications/) с группами дополнительных приложениями(350 пакетов!)|
-
-Вместо kde-application можно выбрать только нужные вам группы [тут](https://archlinux.org/packages/extra/any/kde-applications-meta/) или [тут](https://archlinux.org/packages/kde-unstable/any/kde-applications-meta/)  
-
----  
-
-Включим SDDM и перезапустим систему:  
-
-```
-sudo systemctl enable sddm
-```
-```
-reboot
-```
-
----  
-
-## Начальная настройка  
+```  
 
 - #### Настроим драйвер NVIDIA  
 
@@ -271,6 +234,46 @@ sudo nvidia-settings
 
 ---  
 
+
+## Начальная настройка  
+
+- #### Установим yay  
+
+Одно из главных преимуществ Arch Linux - это Arch User Repository (AUR). В пользовательских репозиториях очень быстро появляются новые версии пакетов.  
+
+Скрипты с информацией о сборке пакетов тут неофициальные. У меня никогда не возникало проблем и я ничего не слышал о взломах через AUR, но будьте благоразумны.  
+
+[yay](https://github.com/Jguer/yay) - один из помощников AUR. С его помощью можно устанавливать и обновлять пакеты из AUR и обычных репозиториев.  
+
+ Использование без ключей выполнит поиск пакета, содержащего искомые слова в названии или описании. Поиск идет по подключенным репозиториям и в AUR.  
+
+ Создадим каталог для git и перейдём в него. Я сделаю это в Download:  
+
+```
+mkdir ~/Download/git
+```
+```
+cd Download/git/
+```
+Клонируем репозиторий с yay и установим его с помощью [makepkg](https://wiki.archlinux.org/title/Makepkg):  
+
+```
+git clone https://aur.archlinux.org/yay.git
+```
+```
+cd yay
+```
+```
+makepkg -sri
+```
+`-i` - установит пакет после сборки  
+`-s` - установит недостающие зависимости
+`-r` - удалит зависимости для сборки после ее окончания
+`-c` - очистит каталог установки
+
+---  
+
+
 - #### Установим брандмауэр  
 
 Установим и запустим службу `nftables':    
@@ -294,7 +297,7 @@ sudo systemctl enable --now nftables
 Установим и запустим службу `zramd`:
 
 ```
-sudo pacman -S zramd
+yay zramd
 ```
 ```
 sudo systemctl enable --now zramd
@@ -339,9 +342,9 @@ yay timeshift-autosnap
 
 ---
 
-Сейчас нашей системой можно пользоваться. 
+Ура! Наша система почти готова. Но уже сейчас ей можно пользоваться не боясь прострелить себе колено.
 
-В следующей статье я опишу оптимизацию производительности и составлю список используемых мною пакетов.  
+В следующей статье я оптимизирую и украшу нашу систему. 
 
-Если у вас есть какие-то вопросы по теме, то я с удовольствием отвечу на них в комментариях. Рад, если эта статья была вам полезна!
+Надеюсь, эта статья была полезна вам! А если у вас возникла проблема, вы можете рассказать о ней в комментариях. Я обязательно отвечу.
 
