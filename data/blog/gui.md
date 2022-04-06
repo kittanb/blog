@@ -19,7 +19,7 @@ images: []
 - проприетарный DKMS драйвер NVIDIA  
 - yay (майонез)
 - zramd в качестве SWAP
-- nftables как брандмауэра
+- nftables как брандмауэр
 - timeshift для резервного копирования  
 
 ---
@@ -171,7 +171,7 @@ sudo pacman -S xorg-server xorg-apps plasma kde-applications
 
 ---  
 
-- #### и включим SDDM:  
+- #### и включим SDDM  
 
 ```
 sudo systemctl enable sddm
