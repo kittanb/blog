@@ -3,7 +3,7 @@ title: Установка Arch Linux
 date: '2022-02-16'
 tags: ['arch', 'btrfs']
 draft: false
-summary: Описана установка на ssd с btrfs и efi.
+summary: Установим Arch Linux на реальный комп с btrfs и efi.
 layout: PostLayout
 ---
 
@@ -144,7 +144,7 @@ mount /dev/sdX1 /mnt/boot/efi
 - #### Установим систему в корневой каталог
 
 ```
-pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager vim git intel-ucode iucode-tool
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware networkmanager intel-ucode iucode-tool vim git curl wget
 ```  
 
 `pacstrap` скрипт для установки пакетов в новый корневой каталог
@@ -153,16 +153,18 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware network
 
 | Пакет   | Описание |
 |:-----------|:--|
-|`base`|[группа пакетов](https://archlinux.org/packages/core/any/base/) для базовой установки Arch Linux|
-|`base-devel`|[группа пакетов](https://archlinux.org/groups/x86_64/base-devel/) с инструментами для сборки|
-|`linux-zen`|[ядро](https://wiki.archlinux.org/title/Kernel_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)) linux-zen|
-|`linux-zen-headers`|заголовки ядра linux-zen|
-|`linux-firmware`|драйвера устройств|
-|`networkmanager`|[набор инструментов](https://wiki.archlinux.org/title/NetworkManager) для настройки сети|
-|`vim`|камсольный текстовые редактор|
-|`git`|[интерфейс для AUR](https://wiki.archlinux.org/title/git)|
-|`intel-ucode`|[обновление микрокода процессора](https://wiki.archlinux.org/title/Microcode), если у в AMD используйте `amd-ucode`|
-|`iucode-tool`|[управление обновлениями микрокода](https://gitlab.com/iucode-tool/iucode-tool/-/wikis/home)|
+|[base](https://archlinux.org/packages/core/any/base/)|группа пакетов для базовой установки Arch Linux|
+|[base-devel](https://archlinux.org/groups/x86_64/base-devel/)|группа пакетов с инструментами для сборки|
+|[linux-zen](https://wiki.archlinux.org/title/Kernel)|ядро linux-zen|
+|[linux-zen-headers](https://archlinux.org/packages/extra/x86_64/linux-zen-headers/)|заголовки ядра linux-zen|
+|[linux-firmware](https://archlinux.org/packages/core/any/linux-firmware/)|драйвера устройств|
+|[networkmanager](https://wiki.archlinux.org/title/NetworkManager)|набор инструментов для настройки сети|
+|[intel-ucode](https://wiki.archlinux.org/title/Microcode)|обновление микрокода процессора, если у в AMD используйте `amd-ucode`|
+|[iucode-tool](https://gitlab.com/iucode-tool/iucode-tool/-/wikis/home)|управление обновлениями микрокода|
+|[vim](https://wiki.archlinux.org/title/vim)|камсольный текстовые редактор|
+|[git](https://wiki.archlinux.org/title/git)|интерфейс для AUR|
+|[curl](https://wiki.archlinux.org/title/CURL)|инструмент для передачи данных с помощью URL-адресов|
+|[wget](https://wiki.archlinux.org/title/Wget)|инструмент для загрузки файлов по http и ftp|
 
 ---
 
