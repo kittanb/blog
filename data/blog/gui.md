@@ -97,7 +97,7 @@ GNOME использует [Wayland](https://wiki.archlinux.org/title/wayland) �
 
 - Минимальная установка:
 ```
-sudo pacman -S gnome-shell gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
+sudo pacman -S gnome-shell gnome-terminal gnome-tweaks gnome-control-center xdg-user-dirs gdm gnome-keyring nautilus eog file-roller
 ```  
 
 - Полная установка:
@@ -119,18 +119,18 @@ sudo systemctl enable gdm
 
 | Пакет   | Описание |
 |:-----------|:--|
-|`gnome-shell`|десктоп Gnome|
-|`gnome-terminal`|терминал|
-|`gnome-tweak-tool`|настройки для Gnome|
-|`gnome-control-center`|настройки для рабочего стола Gnome|
-|`xdg-user-dirs`|[менеджер пользовательских каталогов](https://wiki.archlinux.org/title/XDG_user_directories)|
-|`gdm`|[менеджер дисплея Gnome](https://wiki.archlinux.org/title/GDM)|
-|`gnome-keyring`|[хранитель паролей](https://wiki.archlinux.org/title/GNOME/Keyring)|
-|`nautilus`|файловый менеджер|
-|`eog`|просмотр фото|
-|`file-roller`|архиватор|
-|`gnome`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome/) с десктопом и основными приложениями|
-|`gnome-extra`|[группа пакетов](https://archlinux.org/groups/x86_64/gnome-extra/) с дополнительными приложениями|  
+|[gnome-shell](https://archlinux.org/packages/extra/x86_64/gnome-shell/)|оболочка рабочего стола Gnome|
+|[gnome-terminal](https://archlinux.org/packages/extra/x86_64/gnome-terminal/)|эмулятор терминала|
+|[gnome-tweaks](https://archlinux.org/packages/extra/any/gnome-tweaks/)|интерфейс для расширенных настроек Gnome|
+|[gnome-control-center](https://archlinux.org/packages/extra/x86_64/gnome-control-center/)|интерфейс для основных настроек Gnome|
+|[xdg-user-dirs](https://wiki.archlinux.org/title/XDG_user_directories)|менеджер пользовательских каталогов|
+|[gdm](https://wiki.archlinux.org/title/GDM)|менеджер дисплея Gnome|
+|[gnome-keyring](https://wiki.archlinux.org/title/GNOME/Keyring)|хранитель паролей|
+|[nautilus](https://wiki.archlinux.org/title/GNOME/Files)|файловый менеджер|
+|[eog](https://archlinux.org/packages/extra/x86_64/eog/)|просмотр изображений|
+|[file-roller](https://archlinux.org/packages/extra/x86_64/file-roller/)|архиватор|
+|[gnome](https://archlinux.org/groups/x86_64/gnome/)|группа пакетов с десктопом и основными приложениями|
+|[gnome-extra](https://archlinux.org/groups/x86_64/gnome-extra/)|группа пакетов с дополнительными приложениями|  
 
 ---  
 
@@ -154,18 +154,18 @@ sudo pacman -S xorg-server xorg-apps plasma kde-applications
 
 | Пакет   | Описание |
 |:-----------|--|
-|`xorg-server`|Xorg сервер|
-|`xorg-apps`|[группа пакетов](https://archlinux.org/groups/x86_64/xorg-apps/) с конфигами для X|
-|`plasma-desktop`|десктоп Plasma|
-|`sddm`|[менеджер дисплея KDE](https://wiki.archlinux.org/title/SDDM)|
-|`plasma-nm`|апплет Plasma для NetworkManager|
-|`plasma-pa`|апплет Plasma для PulseAudio|
-|`dolphin`|файловый менеджер|
-|`konsole`|терминал|
-|`kdeplasma-addons`|улучшения для Plasma|
-|`kde-gtk-config`|интеграция с GTK приложениями|
-|`plasma`|[группа пакетов](https://archlinux.org/groups/x86_64/plasma/) с десктопом и основными приложениями|
-|`kde-applications`|[группа пакетов](https://archlinux.org/groups/x86_64/kde-applications/) с группами дополнительных приложениями(350 пакетов!)|
+|[xorg-server](https://wiki.archlinux.org/title/Xorg#Installation)|Xorg сервер|
+|[xorg-apps](https://archlinux.org/groups/x86_64/xorg-apps/)|группа пакетов с конфигами для Xorg|
+|[plasma-desktop](https://wiki.archlinux.org/title/KDE#Installation)|оболочка рабочего стола Plasma|
+|[sddm](https://wiki.archlinux.org/title/SDDM)|менеджер дисплея KDE|
+|[plasma-nm](https://archlinux.org/packages/extra/x86_64/plasma-nm/)|апплет Plasma для NetworkManager|
+|[plasma-pa](https://archlinux.org/packages/extra/x86_64/plasma-pa/)|апплет Plasma для PulseAudio|
+|[dolphin](https://wiki.archlinux.org/title/Dolphin)|файловый менеджер|
+|[konsole](https://wiki.archlinux.org/title/Konsole)|эмулятор терминала|
+|[kdeplasma-addons](https://archlinux.org/packages/extra/x86_64/kdeplasma-addons/)|улучшения для Plasma|
+|[kde-gtk-config](https://archlinux.org/packages/?name=kde-gtk-config)|интеграция с GTK приложениями|
+|[plasma](https://archlinux.org/groups/x86_64/plasma/)|группа пакетов с десктопом и основными приложениями|
+|[kde-applications](https://archlinux.org/groups/x86_64/kde-applications/)|группа пакетов с группами дополнительных приложениями|
 
 Вместо kde-application можно выбрать только нужные вам группы [тут](https://archlinux.org/packages/extra/any/kde-applications-meta/) или [тут](https://archlinux.org/packages/kde-unstable/any/kde-applications-meta/)  
 
@@ -192,15 +192,15 @@ sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulka
 
 | Пакет   | Описание |
 |:-----------|--|
-|`nvidia-dkms`|[DKMS](https://wiki.archlinux.org/title/Dynamic_Kernel_Module_Support) проприетарный драйвер NVIDIA|
-|`nvidia-utils`|утилиты драйвера NVIDIA|
-|`lib32-nvidia-utils`|утилиты драйвера NVIDIA (32-bit)|
-|`nvidia-settings`|[редактор опций NVIDIA](https://wiki.archlinux.org/title/NVIDIA#nvidia-settings)|
-|`vulkan-icd-loader`|[графический API Vulkan](https://wiki.archlinux.org/title/Vulkan)|
-|`lib32-vulkan-icd-loader`|графический API Vulkan (32-bit)|
-|`opencl-nvidia`|[среда выполнения OpenCL](https://wiki.archlinux.org/title/GPGPU#OpenCL) для NVIDIA|
-|`lib32-opencl-nvidia`|среда выполнения OpenCL для NVIDIA (32-bit)|
-|`libxnvctrl`|API для NVIDIA и X|
+|[nvidia-dkms](https://archlinux.org/packages/extra/x86_64/nvidia-dkms/)|[DKMS](https://wiki.archlinux.org/title/Dynamic_Kernel_Module_Support) проприетарный драйвер NVIDIA|
+|[nvidia-utils](https://archlinux.org/packages/extra/x86_64/nvidia-utils/)|утилиты драйвера NVIDIA|
+|[lib32-nvidia-utils](https://archlinux.org/packages/multilib/x86_64/lib32-nvidia-utils/)|утилиты драйвера NVIDIA (32-bit)|
+|[nvidia-settings](https://wiki.archlinux.org/title/NVIDIA#nvidia-settings)|редактор опций NVIDIA|
+|[vulkan-icd-loader](https://wiki.archlinux.org/title/Vulkan)|графический API Vulkan|
+|[lib32-vulkan-icd-loader](https://archlinux.org/packages/multilib/x86_64/lib32-vulkan-icd-loader/)|графический API Vulkan (32-bit)|
+|[opencl-nvidia](https://wiki.archlinux.org/title/GPGPU#OpenCL)|среда выполнения OpenCL для NVIDIA|
+|[lib32-opencl-nvidia](https://archlinux.org/packages/multilib/x86_64/lib32-opencl-nvidia/)|среда выполнения OpenCL для NVIDIA (32-bit)|
+|[libxnvctrl](https://archlinux.org/packages/extra/x86_64/libxnvctrl/)|API для NVIDIA и X|
 
 ---  
 
