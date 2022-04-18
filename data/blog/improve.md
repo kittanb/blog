@@ -3,7 +3,7 @@ title: Улучшение и оптимизация Arch
 date: '2022-04-18'
 tags: ['arch', 'zsh', 'customize']
 draft: false
-summary: Сделаем наш Arch удобнее, вкуснее :yum: и производительнее.
+summary: Сделаем наш Arch удобнее, производительнее и красивее.
 images: []
 ---
 
