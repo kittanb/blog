@@ -13,23 +13,32 @@ images: []
 
 ---
 
-Привет! В этой статье мы настроим и оптимизируем наш Arch. 
+Привет! В этой статье мы улучшим работу в терминале и оптимизируем наш Arch.  
+
+Мы используем:  
+
+- zsh
+- oh-my-zsh
+- powerlevel10k
+- gogh
+- ananicy
+- dbus-broker  
+
+---
 
 ## Установка и настройка zsh  
 
----
-
-- #### Установим zsh:    
-
-[zsh](https://wiki.archlinux.org/title/Zsh) - современный эмулятор терминала. Улучшенное дополнение команд и куча разных улучшений.
+- #### Установим zsh    
 
 ```
 yay -S zsh
-```
+```  
+
+[zsh](https://wiki.archlinux.org/title/Zsh) - современный эмулятор терминала. Улучшенное дополнение команд и куча разных улучшений.  
 
 ---
 
-- #### Сменим оболочку на zsh:  
+- #### Сменим оболочку на zsh  
 
 ```
 chsh -s /bin/zsh
@@ -37,29 +46,27 @@ chsh -s /bin/zsh
 
 ---
 
-- #### Запустим zsh и выполним базовую настройку с помощью мастера:
+- #### Запустим zsh
 
 ```
 zsh
 ```  
 
-Я увеличил количество строк в $HISTFILE и в редакторе строк сменил хоткеи на vi.  
+После запуска появится мастер настройки. Я увеличил количество строк в $HISTFILE и в редакторе строк сменил хоткеи на vi. Изменить настройки можно в файле `~/.zshrc`.  
 
 ---
 
-- #### Установим oh-my-zsh из git:  
-
-[oh-my-zsh](https://ohmyz.sh/) - платформа для управления конфигурацией `zsh`. Удобно управлять плагинами и темами zsh.  
+- #### Установим oh-my-zsh  
 
 ```
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+```  
 
-Для обновления время от времени запускайте `update_oh_my_zsh`  
+[oh-my-zsh](https://ohmyz.sh/) - платформа для управления конфигурацией `zsh`. Удобно управлять плагинами и темами zsh. Для обновления иногда запускайте `update_oh_my_zsh`.  
 
 ---
 
-- #### Установим плагины zsh:
+- #### Установим плагины zsh
 
 ```
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -68,13 +75,13 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-В файле `~/.zshrc` добавим плагины `archlinux`, `zsh-syntax-highlighting` и `zsh-autosuggestions`:
+- В файле `~/.zshrc` добавим плагины `archlinux`, `zsh-syntax-highlighting` и `zsh-autosuggestions`:
 
 ```
 73 plugins=(git archlinux zsh-syntax-highlighting zsh-autosuggestions)
 ```
 
-Обновим `~/.zshrc` и перезапустим терминал
+- Обновим `~/.zshrc` и перезапустим терминал:
 
 ```
 source .zshrc
@@ -86,15 +93,14 @@ source .zshrc
 
 ---
 
-- #### Установим powerlevel10k:  
-
-[powerlevel10k](https://github.com/romkatv/powerlevel10k) - тема для `zsh` (кросивое). 
+- #### Установим powerlevel10k  
 
 ```
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
+[powerlevel10k](https://github.com/romkatv/powerlevel10k) - тема для `zsh` (кросивое).  
 
-Установим шрифт Meslo
+- Установим шрифт Meslo:  
 
 ```
 yay ttf-meslo-nerd-font-powerlevel10k
@@ -102,13 +108,13 @@ yay ttf-meslo-nerd-font-powerlevel10k
 
 [Тут](https://github.com/romkatv/powerlevel10k/blob/master/font.md#recommended-font-meslo-nerd-font-patched-for-powerlevel10k) инструкция, как установить его в вашем эмуляторе терминала.  
 
-В файле `~/.zshrc` установим тему 'powerlevel10k':
+- В файле `~/.zshrc` установим тему 'powerlevel10k':
 
 ```
 11 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 
-Обновим `~/.zshrc` и перезапустим терминал: 
+- Обновим `~/.zshrc` и перезапустим терминал: 
 
 ```
 source .zshrc
