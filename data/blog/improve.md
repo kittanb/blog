@@ -1,8 +1,8 @@
 ---
 title: Улучшение и оптимизация Arch
 date: '2022-04-18'
-tags: ['arch', 'zsh']
-draft: true
+tags: ['arch', 'zsh', 'customize']
+draft: false
 summary: Улучшения, оптимизация работы и немного украшательств.
 images: []
 ---
