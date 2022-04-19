@@ -136,6 +136,8 @@ sh -c "$(wget -qO- https://git.io/vQgMr)"
 
 ## Улучшения GNOME
 
+- #### Добавим расширения GNOME
+
 В GNOME расширения распространяются через [этот сайт](https://extensions.gnome.org/). Чтобы пользоваться ими нужно установить расширение для браузера и коннектор.  
 
 Установим коннектор:  
@@ -147,13 +149,12 @@ yay chrome-gnome-shell
 И установим [это](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) расширение для google-chrome. Теперь мы можем устанавливать расширения для GNOME!  
 
 Список наших расширений:
-
+| Расширение   | Описание |
+|:-----------|:--|
 |[BaBar Task Bar](https://extensions.gnome.org/extension/4000/babar/)|анель задач|
 |[Big Sur Status Area](https://extensions.gnome.org/extension/4085/big-sur-status-area/)|переносит пункты системного трея из выпадающего меню в область уведомлений|
 |[Sound Input & Output Device Chooser ](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)|быстрая смена устройств ввода/вывода звука|
 |[Tray Icons: Reloaded](https://extensions.gnome.org/extension/2890/tray-icons-reloaded/)|трей дополнительных приложений на верхней панели|
-
-![ARCH](/static/images/improve/screen_arch.png)
 
 ---
 
