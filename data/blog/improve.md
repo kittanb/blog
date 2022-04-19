@@ -134,7 +134,7 @@ sh -c "$(wget -qO- https://git.io/vQgMr)"
 
 ---
 
-## Улучшения GNOME
+## Улучшение GNOME
 
 - #### Добавим расширения GNOME
 
