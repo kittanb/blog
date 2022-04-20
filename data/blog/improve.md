@@ -77,7 +77,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 - В файле `~/.zshrc` добавим плагины `archlinux`, `zsh-syntax-highlighting` и `zsh-autosuggestions`:
 
-```
+```bash
 73 plugins=(git archlinux zsh-syntax-highlighting zsh-autosuggestions)
 ```
 
@@ -110,7 +110,7 @@ yay ttf-meslo-nerd-font-powerlevel10k
 
 - В файле `~/.zshrc` установим тему 'powerlevel10k':
 
-```
+```bash
 11 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 
@@ -134,7 +134,7 @@ sh -c "$(wget -qO- https://git.io/vQgMr)"
 
 ---
 
-## Улучшение GNOME
+## Улучшение рабочего стола
 
 - #### Добавим расширения GNOME
 
@@ -151,7 +151,7 @@ yay chrome-gnome-shell
 Список наших расширений:
 | Расширение   | Описание |
 |:-----------|:--|
-|[BaBar Task Bar](https://extensions.gnome.org/extension/4000/babar/)|анель задач|
+|[BaBar Task Bar](https://extensions.gnome.org/extension/4000/babar/)|панель задач|
 |[Big Sur Status Area](https://extensions.gnome.org/extension/4085/big-sur-status-area/)|переносит пункты системного трея из выпадающего меню в область уведомлений|
 |[Sound Input & Output Device Chooser ](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)|быстрая смена устройств ввода/вывода звука|
 |[Tray Icons: Reloaded](https://extensions.gnome.org/extension/2890/tray-icons-reloaded/)|трей дополнительных приложений на верхней панели|
@@ -215,3 +215,28 @@ sudo systemctl enable --now dbus-broker.service
 ```
 
 ---
+
+- #### Добавим диск в fstab
+
+У меня есть старый `NTFS` hdd, который я использую как помоечку. Чтобы каждый раз не подключать его руками добавим запись о нём в /etc/fstab.  
+
+В прошлой статье мы создали `fstab` [основанный на UUID](https://www.kittan.ru/blog/archinstall#%D0%B7%D0%B0%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BD%D0%B0%D0%BC%D0%B8-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D1%8B%D1%85-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0%D1%85-%D0%B2-etcfstab). Поэтому узнаем `UUID` нашего диска:  
+
+```
+lsblk -o NAME,SIZE,UUID
+```
+
+В корневом каталоге создадим папку, в которую примонтируем диск:
+
+```
+sudo mkdir /data
+```
+
+В файле `/etc/fstab` создадим следующую запись:
+
+```bash
+# /dev/sdb1
+UUID=НАШ_UUID /data ntfs nofail,x-systemd.device-timeout=1ms,rw,utf8  0   0
+```
+Опция `nofail` исключит ошибки при загрузке при отключенном диске.  
+Опция `x-systemd.device-timeout` установит задержку вместо 90 секунд при отключенном диске.
