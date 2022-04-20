@@ -1,5 +1,5 @@
 ---
-title: Рабочий стол на Arch
+title: Рабочий стол на Arch Linux
 date: '2022-03-17'
 tags: ['arch', 'nvidia', 'aur', 'btrfs']
 draft: false

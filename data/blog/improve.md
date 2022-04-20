@@ -1,5 +1,5 @@
 ---
-title: Улучшение и оптимизация Arch
+title: Улучшение Arch Linux
 date: '2022-04-18'
 tags: ['arch', 'zsh', 'customize']
 draft: false
