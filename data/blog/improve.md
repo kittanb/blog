@@ -103,7 +103,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 - Установим шрифт Meslo:  
 
 ```
-yay ttf-meslo-nerd-font-powerlevel10k
+yay -S ttf-meslo-nerd-font-powerlevel10k
 ```  
 
 [Тут](https://github.com/romkatv/powerlevel10k/blob/master/font.md#recommended-font-meslo-nerd-font-patched-for-powerlevel10k) инструкция, как установить его в вашем эмуляторе терминала.  
@@ -143,7 +143,7 @@ sh -c "$(wget -qO- https://git.io/vQgMr)"
 Установим коннектор:  
 
 ```
-yay chrome-gnome-shell
+yain chrome-gnome-shell
 ```
 
 И установим [это](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) расширение для google-chrome. Теперь мы можем устанавливать расширения для GNOME!  
@@ -165,7 +165,7 @@ yay chrome-gnome-shell
 [nvidia-tweaks](https://aur.archlinux.org/packages/nvidia-tweaks) - сборник улучшений драйвера NVIDIA  
 
 ```
-yay -S nvidia-tweaks
+yain nvidia-tweaks
 ```
 
 ---
@@ -175,7 +175,7 @@ yay -S nvidia-tweaks
 [Ananicy](https://github.com/Nefelim4ag/Ananicy) - демон распределения ресурсов для популярных приложений. Поможет избежать лагов и фризов.  
 
 ```
-yay -S ananicy-git
+yain ananicy-git
 ```
 ```
 sudo systemctl enable --now ananicy
@@ -202,7 +202,7 @@ sudo systemctl enable fstrim.timer
 Установим `dbus-broker`  
 
 ```
-sudo pacman -S dbus-broker
+pacin dbus-broker
 ```
 
 Отключим `dbus.service` и запустим `dbus-broker.service`  
@@ -218,22 +218,30 @@ sudo systemctl enable --now dbus-broker.service
 
 - #### Добавим диск в fstab
 
-У меня есть старый `NTFS` hdd, который я использую как помоечку. Чтобы каждый раз не подключать его руками добавим запись о нём в /etc/fstab.  
+У меня есть старый `NTFS` hdd, который я использую как помоечку. Чтобы каждый раз не подключать его руками добавим запись о нём в `/etc/fstab`.  
 
-В прошлой статье мы создали `fstab` [основанный на UUID](https://www.kittan.ru/blog/archinstall#%D0%B7%D0%B0%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BD%D0%B0%D0%BC%D0%B8-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D1%8B%D1%85-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0%D1%85-%D0%B2-etcfstab). Поэтому узнаем `UUID` нашего диска:  
+- установим драйвер NTFS:  
 
 ```
-lsblk -o NAME,SIZE,UUID
+pacin ntfs-3g
 ```
 
-В корневом каталоге создадим папку, в которую примонтируем диск:
+В прошлой статье мы создали `fstab` [основанный на UUID](https://www.kittan.ru/blog/archinstall#%D0%B7%D0%B0%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BD%D0%B0%D0%BC%D0%B8-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D1%8B%D1%85-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0%D1%85-%D0%B2-etcfstab). Его мы и будем использовать.  
+
+- узнаем `UUID` нашего диска:   
+
+```
+lsblk -f
+```
+
+- в корневом каталоге создадим папку, куда примонтируем диск:  
 
 ```
 sudo mkdir /data
 ```
 
-В файле `/etc/fstab` создадим следующую запись:
-
+- в `/etc/fstab` создадим следующую запись:  
+ 
 ```bash
 # /dev/sdXx
 UUID=НАШ_UUID /data ntfs nofail,x-systemd.device-timeout=1ms,rw,utf8  0   0
