@@ -34,7 +34,7 @@ images: []
 yay -S zsh
 ```  
 
-[zsh](https://wiki.archlinux.org/title/Zsh) - современный командный интерпретатор. Улучшенное дополнение команд и куча разных улучшений.  
+[zsh](https://wiki.archlinux.org/title/Zsh) - современный командный интерпретатор. Я предпочитаю ее из-за легкой настройки, красивости и кучи [полезных плагинов](https://www.kittan.ru/blog/improve#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D0%BC-%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D1%8B-zsh).  
 
 ---
 
