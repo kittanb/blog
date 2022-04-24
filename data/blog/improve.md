@@ -34,7 +34,7 @@ images: []
 yay -S zsh
 ```  
 
-[zsh](https://wiki.archlinux.org/title/Zsh) - современный командный интерпретатор. Я предпочитаю ее из-за легкой настройки, красивости и кучи [полезных плагинов](https://www.kittan.ru/blog/improve#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D0%BC-%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D1%8B-zsh).  
+[zsh](https://wiki.archlinux.org/title/Zsh) - современный командный интерпретатор. Я предпочитаю его из-за легкой настройки, красивости и [полезных плагинов](https://www.kittan.ru/blog/improve#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D0%BC-%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D1%8B-zsh).  
 
 ---
 
@@ -246,6 +246,7 @@ sudo mkdir /data
 # /dev/sdXx
 UUID=НАШ_UUID /data ntfs nofail,rw,utf8  0   0
 ```
+
 Опция `nofail` исключит ошибки при загрузке при отключенном диске.  
 
 ---
