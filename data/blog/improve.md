@@ -244,10 +244,9 @@ sudo mkdir /data
  
 ```bash
 # /dev/sdXx
-UUID=НАШ_UUID /data ntfs nofail,x-systemd.device-timeout=1ms,rw,utf8  0   0
+UUID=НАШ_UUID /data ntfs nofail,rw,utf8  0   0
 ```
 Опция `nofail` исключит ошибки при загрузке при отключенном диске.  
-Опция `x-systemd.device-timeout` установит задержку вместо 90 секунд при отключенном диске.  
 
 ---
 
