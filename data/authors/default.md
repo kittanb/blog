@@ -1,8 +1,8 @@
 ---
 name: Бизюков Владимир
 avatar: /static/images/avatar.png
-occupation: Ведущий инженер
-company: ПАО «МТС»
+occupation: инженер эксплуатации
+company: ООО "МТС Диджитал"
 email: vbiziukov@gmail.com
 telegram: https://t.me/kittanb
 skype: https://join.skype.com/invite/lZ3MxpoJ3bpg
